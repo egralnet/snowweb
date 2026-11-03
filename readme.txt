@@ -2,13 +2,21 @@
 Contributors: snowweb
 Requires at least: 6.6
 Requires PHP: 7.4
-Stable tag: 0.0.0.3
+Stable tag: 0.0.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Security-focused Japanese block theme.
 
 == Changelog ==
+
+= 0.0.0.4 =
+* デザインを ai-ski.net に合わせて作り直し（ヘッダー、2列の記事カード、おすすめ記事、サイドバーの検索・カテゴリー・新着記事、記事の見出し2〜6、表、引用、コード、フッター）。
+* 記事一覧のタイトルに本文用の見出しの装飾が付いてしまう不具合を修正。
+* サイドバーの検索ボタンの文字が縦に折り返す不具合を修正。
+* アイキャッチ画像がない記事は、一覧でサイト名入りの画像を表示。
+* カテゴリー・検索結果のテンプレートを追加。初期のカラム数を2カラムに。
+* テーマ更新時に、選んでいるデザインを自動で当て直すように。
 
 = 0.0.0.3 =
 * snowweb設定に「全体」タブを追加。1カラム・2カラムの切り替え、サイドバーの位置（右・左）、デザイン（標準・コーポレート・やさしい）の切り替え。

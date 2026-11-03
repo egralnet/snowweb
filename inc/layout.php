@@ -45,6 +45,35 @@ function snowweb_layout_hide_sidebar( $content, $block ) {
 add_filter( 'render_block', 'snowweb_layout_hide_sidebar', 10, 2 );
 
 /**
+ * アイキャッチ画像がない記事は、一覧のサムネイルの場所にサイト名を出す。
+ *
+ * @param string   $content  出力される HTML。
+ * @param array    $block    ブロックの情報。
+ * @param WP_Block $instance ブロック（記事の ID を持っている）。
+ * @return string
+ */
+function snowweb_layout_thumb_fallback( $content, $block, $instance = null ) {
+	if ( 'core/post-featured-image' !== $block['blockName'] || '' !== trim( $content ) ) {
+		return $content;
+	}
+	if ( empty( $block['attrs']['className'] ) || false === strpos( $block['attrs']['className'], 'snowweb-thumb' ) ) {
+		return $content;
+	}
+
+	$post_id = ( $instance instanceof WP_Block && isset( $instance->context['postId'] ) ) ? (int) $instance->context['postId'] : get_the_ID();
+	if ( ! $post_id ) {
+		return $content;
+	}
+
+	return sprintf(
+		'<a class="wp-block-post-featured-image snowweb-thumb snowweb-thumb--empty" href="%1$s" tabindex="-1" aria-hidden="true">%2$s</a>',
+		esc_url( get_permalink( $post_id ) ),
+		esc_html( get_bloginfo( 'name' ) )
+	);
+}
+add_filter( 'render_block', 'snowweb_layout_thumb_fallback', 10, 3 );
+
+/**
  * デザイン（スタイルバリエーション）を切り替える。
  *
  * 「外観 → エディター → スタイル」で選んだときと同じく、サイトのスタイル設定を
@@ -133,3 +162,23 @@ function snowweb_layout_on_settings_add( $option, $value ) {
 	}
 }
 add_action( 'add_option_snowweb_settings', 'snowweb_layout_on_settings_add', 10, 2 );
+
+/**
+ * テーマを更新したら、選んでいるデザインをもう一度当て直す。
+ *
+ * 新しい版で色の種類が増えたとき、保存済みのデザインに新しい色が
+ * 入っていないと見た目が崩れるためです。
+ */
+function snowweb_layout_refresh_design_after_update() {
+	if ( get_option( 'snowweb_design_version' ) === SNOWWEB_VERSION ) {
+		return;
+	}
+	update_option( 'snowweb_design_version', SNOWWEB_VERSION, false );
+
+	$current = snowweb_get_setting( 'design_variation' );
+	if ( 'default' !== $current ) {
+		snowweb_apply_design_variation( $current );
+	}
+}
+add_action( 'admin_init', 'snowweb_layout_refresh_design_after_update' );
+add_action( 'after_switch_theme', 'snowweb_layout_refresh_design_after_update' );

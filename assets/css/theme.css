@@ -1,67 +1,999 @@
-/* theme.json で表せない細かな装飾 */
-.snowweb-card {
-	border-radius: 3px;
-	box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+/*
+ * snowweb の見た目
+ *
+ * 色は theme.json のパレット（--wp--preset--color--*）から取るので、
+ * 「snowweb設定 → 全体 → デザイン」を切り替えると、ここの色もすべて変わります。
+ */
+
+body {
+	--sw-page: var(--wp--preset--color--page, #f3f3f3);
+	--sw-bg: var(--wp--preset--color--base, #ffffff);
+	--sw-text: var(--wp--preset--color--contrast, #333333);
+	--sw-sub: var(--wp--preset--color--sub, #999999);
+	--sw-line: var(--wp--preset--color--line, #e3e3e3);
+	--sw-soft: var(--wp--preset--color--soft, #f6f6f6);
+	--sw-dark: var(--wp--preset--color--dark, #333333);
+	--sw-dark-text: var(--wp--preset--color--base, #ffffff);
+	--sw-title: var(--wp--preset--color--title, #666666);
+	--sw-heading: var(--wp--preset--color--primary, #5064ad);
+	--sw-h2-bg: var(--wp--preset--color--h-2-bg, #f4f4f4);
+	--sw-check: var(--wp--preset--color--check, #2f4a8f);
+	--sw-link: var(--wp--preset--color--link, #3d79c4);
+	--sw-link-hover: var(--wp--preset--color--link-hover, #2a5c9c);
+	--sw-marker: var(--wp--preset--color--marker, #ffe58a);
+	--sw-footer: var(--wp--preset--color--footer, #222222);
+	--sw-footer-text: var(--wp--preset--color--footer-text, #c9ced6);
+	--sw-radius: var(--wp--custom--radius, 3px);
+	--sw-heading-radius: var(--wp--custom--heading-radius, 0);
+	--sw-shadow: var(--wp--custom--shadow, 0 1px 3px rgb(0 0 0 / 8%));
+	--sw-site: var(--wp--custom--site-width, 1200px);
+	--sw-side: var(--wp--custom--side-width, 300px);
+	--sw-gap: var(--wp--custom--gap, 48px);
+	--sw-gutter: 24px;
+	--sw-article: var(--wp--custom--article-size, 18px);
+
+	margin: 0;
+	overflow-wrap: anywhere;
 }
 
-.wp-block-post-template {
-	display: grid;
-	gap: 24px;
+@media (max-width: 960px) {
+	body {
+		--sw-gap: 32px;
+		--sw-gutter: 16px;
+	}
 }
 
-/* ===== レイアウト（snowweb設定 → 全体） ===== */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+:focus-visible {
+	outline: 2px solid var(--sw-link);
+	outline-offset: 2px;
+}
+
+/* ===== ヘッダー ===== */
+.snowweb-header {
+	position: relative;
+	z-index: 2;
+	background: var(--sw-bg);
+	box-shadow: 0 1px 4px rgb(0 0 0 / 6%);
+}
+
+.snowweb-header__inner,
+.snowweb-footer__inner,
 .snowweb-layout {
 	box-sizing: border-box;
-	max-width: var(--wp--style--global--wide-size, 1200px);
+	max-width: var(--sw-site);
 	margin-inline: auto;
-	padding-inline: 16px;
+	padding-inline: var(--sw-gutter);
 }
 
-/* 2カラム：記事と右（または左）のサイドバー */
+.snowweb-header__inner {
+	gap: 12px 24px;
+	min-height: 76px;
+}
+
+.snowweb-brand {
+	align-items: baseline;
+	gap: 4px 14px;
+	min-width: 0;
+}
+
+.snowweb-brand__name {
+	margin: 0;
+	font-size: 22px;
+	font-weight: 800;
+	letter-spacing: 0.16em;
+	line-height: 1.2;
+	text-transform: uppercase;
+}
+
+.snowweb-brand__name a,
+.snowweb-brand__name a:hover {
+	color: var(--sw-text);
+	text-decoration: none;
+}
+
+.snowweb-brand__tagline {
+	margin: 0;
+	font-size: 11px;
+	color: var(--sw-sub);
+	letter-spacing: 0.05em;
+}
+
+.snowweb-nav {
+	font-size: 12.5px;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	--navigation-layout-justification-setting: flex-end;
+}
+
+.snowweb-nav .wp-block-navigation__container {
+	gap: 4px 28px;
+}
+
+.snowweb-nav .wp-block-navigation-item__content {
+	display: block;
+	padding: 6px 0;
+	color: #666;
+}
+
+.snowweb-nav .wp-block-navigation-item__content:hover {
+	color: var(--sw-text);
+	text-decoration: none;
+}
+
+.snowweb-nav .current-menu-item > .wp-block-navigation-item__content,
+.snowweb-nav [aria-current] {
+	color: var(--sw-text);
+	box-shadow: inset 0 -2px 0 var(--sw-dark);
+}
+
+/* ===== 2カラム・1カラム（snowweb設定 → 全体） ===== */
+.snowweb-layout {
+	padding-block: 36px 64px;
+}
+
+.snowweb-layout > * {
+	min-width: 0;
+	margin-block: 0;
+}
+
+body.snowweb-col-1 .snowweb-main {
+	max-width: 860px;
+	margin-inline: auto;
+}
+
 body.snowweb-col-2 .snowweb-layout {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) 300px;
-	gap: 48px;
+	grid-template-columns: minmax(0, 1fr) var(--sw-side);
+	gap: var(--sw-gap);
 	align-items: start;
 }
 
 body.snowweb-col-2.snowweb-sidebar-left .snowweb-layout {
-	grid-template-columns: 300px minmax(0, 1fr);
+	grid-template-columns: var(--sw-side) minmax(0, 1fr);
 }
 
 body.snowweb-col-2.snowweb-sidebar-left .snowweb-sidebar {
 	order: -1;
 }
 
-/* 2カラムでは記事を横幅いっぱいに使う */
-body.snowweb-col-2 .snowweb-main.is-layout-constrained > * {
-	max-width: none;
-}
-
-.snowweb-sidebar {
-	display: grid;
-	gap: 24px;
-}
-
-.snowweb-widget {
-	border-radius: 3px;
-	box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
-}
-
-.snowweb-widget-title {
-	margin-top: 0;
-	font-size: var(--wp--preset--font-size--medium);
-}
-
-/* スマートフォン・タブレット：サイドバーは記事の下へ */
 @media (max-width: 960px) {
+	.snowweb-layout {
+		padding-block: 20px 48px;
+	}
+
 	body.snowweb-col-2 .snowweb-layout,
 	body.snowweb-col-2.snowweb-sidebar-left .snowweb-layout {
 		grid-template-columns: minmax(0, 1fr);
-		gap: 32px;
 	}
 
 	body.snowweb-col-2.snowweb-sidebar-left .snowweb-sidebar {
 		order: 0;
 	}
+}
+
+/* ===== 見出し（「— 新着記事 —」のように左右に線が伸びる） ===== */
+.snowweb-section-title.wp-block-heading {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin: 0 0 24px;
+	padding: 0;
+	background: none;
+	border: 0;
+	font-size: 16px;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	color: var(--sw-text);
+}
+
+.snowweb-section-title::before,
+.snowweb-section-title::after {
+	content: "";
+	flex: 1;
+	height: 2px;
+	background: var(--sw-dark);
+}
+
+.snowweb-picks {
+	margin-bottom: 48px;
+}
+
+/* おすすめ記事がないときは、見出しごと出さない */
+.snowweb-picks:not(:has(li)) {
+	display: none;
+}
+
+.snowweb-page-head {
+	margin-bottom: 24px;
+}
+
+.snowweb-page-head__title {
+	margin: 0;
+	font-size: 22px;
+	font-weight: 900;
+	line-height: 1.5;
+}
+
+.snowweb-page-head__intro {
+	margin-top: 8px;
+	color: var(--sw-sub);
+	font-size: 14px;
+}
+
+/* ===== サムネイル ===== */
+.snowweb-thumb {
+	position: relative;
+	margin: 0;
+	overflow: hidden;
+	aspect-ratio: 16 / 9;
+	background: linear-gradient(135deg, #3a3a3a, #707070);
+}
+
+.snowweb-thumb img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: opacity 0.2s;
+}
+
+/* アイキャッチ画像がない記事 */
+.snowweb-thumb--empty {
+	display: grid;
+	place-items: center;
+	color: rgb(255 255 255 / 85%);
+	font-weight: 900;
+	font-size: 15px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.snowweb-thumb--empty:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+/* ===== おすすめ記事のカード（画像が上、タイトルが下） ===== */
+.snowweb-cards.wp-block-post-template {
+	gap: 28px 20px;
+}
+
+.snowweb-card {
+	position: relative;
+	display: grid;
+	gap: 12px;
+}
+
+.snowweb-card > * {
+	margin: 0;
+}
+
+.snowweb-card__title {
+	margin: 0;
+	padding: 0 4px;
+	font-size: 13.5px;
+	font-weight: 700;
+	line-height: 1.7;
+	text-align: center;
+}
+
+.snowweb-card__title a {
+	color: var(--sw-text);
+}
+
+/* カード全体を押せるようにする */
+.snowweb-card__title a::after,
+.snowweb-row__title a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+}
+
+.snowweb-card:hover .snowweb-card__title a {
+	color: var(--sw-link);
+	text-decoration: none;
+}
+
+.snowweb-card:hover img {
+	opacity: 0.85;
+}
+
+/* ===== 記事一覧のカード（白い箱・2列） ===== */
+.snowweb-rows.wp-block-post-template {
+	gap: 20px;
+}
+
+.snowweb-row {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: var(--sw-bg);
+	border-radius: var(--sw-radius);
+	box-shadow: var(--sw-shadow);
+	overflow: hidden;
+	transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.snowweb-row > * {
+	margin: 0;
+}
+
+.snowweb-row:hover {
+	box-shadow: 0 4px 14px rgb(0 0 0 / 12%);
+	transform: translateY(-2px);
+}
+
+.snowweb-row .snowweb-thumb {
+	border-top: 4px solid var(--sw-dark);
+}
+
+.snowweb-row__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 10px;
+	padding: 14px 16px 12px;
+}
+
+.snowweb-row__body > * {
+	margin: 0;
+}
+
+.snowweb-row__title {
+	margin: 0;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 1.65;
+}
+
+.snowweb-row__title a,
+.snowweb-row__title a:hover {
+	color: var(--sw-text);
+	text-decoration: none;
+}
+
+.snowweb-row__date {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 4px;
+	margin-top: auto;
+	font-size: 11px;
+	color: var(--sw-sub);
+}
+
+/* 時計の印 */
+.snowweb-row__date::before {
+	content: "";
+	width: 11px;
+	height: 11px;
+	border: 1.5px solid currentColor;
+	border-radius: 50%;
+	box-sizing: border-box;
+	background: linear-gradient(currentColor, currentColor) no-repeat 50% 25% / 1.5px 35%, linear-gradient(currentColor, currentColor) no-repeat 70% 55% / 30% 1.5px;
+}
+
+@media (max-width: 600px) {
+	.snowweb-rows.wp-block-post-template {
+		gap: 12px;
+	}
+
+	.snowweb-cards.wp-block-post-template {
+		gap: 20px 12px;
+	}
+
+	.snowweb-row__body {
+		padding: 10px 10px 8px;
+	}
+
+	.snowweb-row__title {
+		font-size: 13px;
+	}
+
+	.snowweb-card__title {
+		padding: 0;
+		font-size: 12.5px;
+		text-align: left;
+	}
+}
+
+.snowweb-empty {
+	padding: 24px;
+	background: var(--sw-bg);
+	box-shadow: var(--sw-shadow);
+	color: var(--sw-sub);
+	text-align: center;
+}
+
+/* ===== ページ送り ===== */
+.snowweb-pagination {
+	gap: 8px;
+	margin-top: 32px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.snowweb-pagination a,
+.snowweb-pagination .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	padding: 8px 14px;
+	box-sizing: border-box;
+	border: 1px solid var(--sw-line);
+	border-radius: 4px;
+	background: var(--sw-bg);
+	color: var(--sw-text);
+	text-decoration: none;
+}
+
+.snowweb-pagination a:hover {
+	border-color: var(--sw-text);
+	text-decoration: none;
+}
+
+.snowweb-pagination .page-numbers.current {
+	background: var(--sw-dark);
+	border-color: var(--sw-dark);
+	color: var(--sw-dark-text);
+}
+
+.snowweb-pagination .page-numbers.dots {
+	border: 0;
+	background: none;
+}
+
+/* ===== サイドバー ===== */
+.snowweb-sidebar {
+	display: grid;
+	gap: 24px;
+	align-content: start;
+}
+
+.snowweb-sidebar > * {
+	margin: 0;
+}
+
+.snowweb-widget {
+	padding: 20px;
+	background: var(--sw-bg);
+	border-radius: var(--sw-radius);
+	box-shadow: var(--sw-shadow);
+	font-size: 14px;
+}
+
+.snowweb-widget > * {
+	margin-block: 0;
+}
+
+.snowweb-widget > * + * {
+	margin-top: 0;
+}
+
+/* 濃い色のリボン風の見出し */
+.snowweb-widget-title.wp-block-heading {
+	position: relative;
+	display: inline-block;
+	margin: 0 0 16px -28px;
+	padding: 5px 22px 5px 28px;
+	background: var(--sw-dark);
+	color: var(--sw-dark-text);
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1.6;
+	clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 50%, 100% 100%, 0 100%);
+}
+
+.snowweb-widget ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.snowweb-widget li {
+	padding: 8px 0;
+	border-top: 1px dashed var(--sw-line);
+}
+
+.snowweb-widget li:first-child {
+	border-top: 0;
+}
+
+.snowweb-widget a {
+	color: var(--sw-text);
+}
+
+/* 新着記事（画像が上、タイトルが下） */
+.snowweb-side-posts.wp-block-latest-posts li {
+	display: grid;
+	gap: 6px;
+	padding: 0 0 16px;
+	border: 0;
+	font-size: 12.5px;
+	font-weight: 700;
+	line-height: 1.6;
+}
+
+.snowweb-side-posts .wp-block-latest-posts__featured-image {
+	margin: 0;
+}
+
+.snowweb-side-posts .wp-block-latest-posts__featured-image img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
+.snowweb-side-posts.wp-block-latest-posts li:last-child {
+	padding-bottom: 0;
+}
+
+/* 検索（枠だけ・虫めがねのボタン） */
+.snowweb-widget--search {
+	padding: 0;
+}
+
+.wp-block-search .wp-block-search__inside-wrapper {
+	display: flex;
+	padding: 0;
+	border: 0;
+}
+
+.wp-block-search .wp-block-search__input {
+	flex: 1;
+	min-width: 0;
+	margin: 0;
+	padding: 12px 14px;
+	border: 1px solid var(--sw-line);
+	border-right: 0;
+	border-radius: 0;
+	background: var(--sw-bg);
+	color: var(--sw-text);
+	font: inherit;
+	font-size: 13px;
+}
+
+.wp-block-search .wp-block-search__button {
+	display: grid;
+	place-items: center;
+	width: 46px;
+	margin: 0;
+	padding: 0;
+	border: 1px solid var(--sw-line);
+	border-radius: 0;
+	background: var(--sw-bg);
+	color: var(--sw-text);
+	cursor: pointer;
+}
+
+.wp-block-search .wp-block-search__button:hover {
+	background: var(--sw-dark);
+	color: var(--sw-dark-text);
+}
+
+.wp-block-search .wp-block-search__button svg {
+	width: 18px;
+	height: 18px;
+	fill: currentColor;
+}
+
+/* カテゴリーは濃い色の箱 */
+.snowweb-widget--dark {
+	padding: 0;
+	background: var(--sw-dark);
+	overflow: hidden;
+}
+
+.snowweb-widget--dark .snowweb-widget-title.wp-block-heading {
+	display: block;
+	margin: 0;
+	padding: 12px 16px;
+	background: none;
+	clip-path: none;
+	border-bottom: 1px solid rgb(255 255 255 / 15%);
+}
+
+.snowweb-widget--dark li {
+	padding: 0;
+	border-top: 1px solid rgb(255 255 255 / 10%);
+}
+
+.snowweb-widget--dark li:first-child {
+	border-top: 0;
+}
+
+.snowweb-widget--dark a {
+	position: relative;
+	display: block;
+	padding: 10px 16px 10px 30px;
+	color: var(--sw-dark-text);
+	font-size: 13px;
+}
+
+.snowweb-widget--dark a::before {
+	content: "";
+	position: absolute;
+	left: 16px;
+	top: 50%;
+	border: 4px solid transparent;
+	border-left: 5px solid currentColor;
+	transform: translateY(-50%);
+}
+
+.snowweb-widget--dark a:hover {
+	background: rgb(255 255 255 / 8%);
+	color: var(--sw-dark-text);
+	text-decoration: none;
+}
+
+.snowweb-widget--dark .children a {
+	padding-left: 44px;
+}
+
+.snowweb-widget--dark .children a::before {
+	left: 30px;
+}
+
+/* ===== 記事・固定ページ（白い箱） ===== */
+.snowweb-entry {
+	padding: 36px 44px 44px;
+	background: var(--sw-bg);
+	border-radius: var(--sw-radius);
+	box-shadow: var(--sw-shadow);
+}
+
+.snowweb-entry > * {
+	margin-block: 0;
+}
+
+@media (max-width: 600px) {
+	.snowweb-entry {
+		margin-inline: calc(var(--sw-gutter) * -1);
+		padding: 20px var(--sw-gutter) 32px;
+		border-radius: 0;
+		box-shadow: none;
+	}
+}
+
+.snowweb-entry__title {
+	margin: 10px 0 8px;
+	color: var(--sw-title);
+	font-size: 28px;
+	font-weight: 900;
+	line-height: 1.5;
+	line-break: normal;
+}
+
+@media (max-width: 600px) {
+	.snowweb-entry__title {
+		font-size: 21px;
+	}
+}
+
+.snowweb-entry__date {
+	font-size: 12.5px;
+	color: var(--sw-sub);
+}
+
+.snowweb-entry__eyecatch {
+	margin: 20px 0 28px;
+	border-radius: var(--sw-radius);
+	overflow: hidden;
+}
+
+.snowweb-entry__eyecatch img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.snowweb-entry__tags {
+	margin-top: 32px;
+	font-size: 12px;
+}
+
+.snowweb-entry__tags a {
+	display: inline-block;
+	padding: 2px 10px;
+	border: 1px solid var(--sw-line);
+	border-radius: 3px;
+	color: var(--sw-sub);
+}
+
+.snowweb-entry__tags .wp-block-post-terms__separator {
+	display: none;
+}
+
+/* ===== 記事本文 ===== */
+.snowweb-prose {
+	margin-top: 24px;
+	font-size: var(--sw-article);
+	line-height: 1.95;
+}
+
+.snowweb-prose > * {
+	margin-block: 0 1.5em;
+}
+
+.snowweb-prose > :last-child {
+	margin-bottom: 0;
+}
+
+/* 大見出し：左に太い線、うすい地 */
+.snowweb-prose h2 {
+	margin: 2.8em 0 1.2em;
+	padding: 0.85em 1.1em 0.85em 1.4em;
+	border-left: 8px solid var(--sw-heading);
+	border-radius: var(--sw-heading-radius);
+	background: var(--sw-h2-bg);
+	color: var(--sw-text);
+	font-size: 1.3em;
+	font-weight: 800;
+	line-height: 1.5;
+}
+
+/* 中見出し：左に太い線、文字の下に細い線 */
+.snowweb-prose h3 {
+	margin: 2.4em 0 1em;
+	padding: 0.5em 0.6em 0.6em 1.4em;
+	border-left: 8px solid var(--sw-heading);
+	background: linear-gradient(var(--sw-line), var(--sw-line)) no-repeat left 1.4em bottom / calc(100% - 1.4em) 1px;
+	font-size: 1.18em;
+	font-weight: 800;
+	line-height: 1.5;
+}
+
+/* 小見出し：左にチェックマーク */
+.snowweb-prose h4 {
+	position: relative;
+	margin: 2em 0 0.8em;
+	padding-left: 1.9em;
+	font-size: 1.05em;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	line-height: 1.7;
+}
+
+.snowweb-prose h4::before {
+	content: "";
+	position: absolute;
+	left: 0.35em;
+	top: 0.2em;
+	width: 0.4em;
+	height: 0.85em;
+	border: solid var(--sw-check);
+	border-width: 0 2.5px 2.5px 0;
+	transform: rotate(45deg);
+}
+
+/* 見出し5：下に点線 */
+.snowweb-prose h5 {
+	margin: 1.8em 0 0.8em;
+	padding-bottom: 0.3em;
+	border-bottom: 2px dotted var(--sw-line);
+	font-size: 1em;
+	font-weight: 800;
+	line-height: 1.7;
+}
+
+/* 見出し6：左に小さな四角 */
+.snowweb-prose h6 {
+	position: relative;
+	margin: 1.6em 0 0.6em;
+	padding-left: 1.1em;
+	color: var(--sw-text);
+	font-size: 0.95em;
+	font-weight: 700;
+	line-height: 1.7;
+}
+
+.snowweb-prose h6::before {
+	content: "";
+	position: absolute;
+	left: 0.1em;
+	top: 0.6em;
+	width: 0.5em;
+	height: 0.5em;
+	background: var(--sw-heading);
+}
+
+.snowweb-prose :is(h2, h3, h4, h5, h6):first-child {
+	margin-top: 0;
+}
+
+.snowweb-prose ul,
+.snowweb-prose ol {
+	padding-left: 1.5em;
+}
+
+.snowweb-prose li + li {
+	margin-top: 0.3em;
+}
+
+.snowweb-prose blockquote,
+.snowweb-prose .wp-block-quote {
+	margin-inline: 0;
+	padding: 16px 20px;
+	border-left: 4px solid var(--sw-line);
+	border-radius: var(--sw-radius);
+	background: var(--sw-soft);
+	color: var(--sw-sub);
+}
+
+.snowweb-prose blockquote p:last-of-type {
+	margin-bottom: 0;
+}
+
+.snowweb-prose blockquote cite {
+	display: block;
+	margin-top: 8px;
+	font-size: 13px;
+	font-style: normal;
+}
+
+.snowweb-prose blockquote cite::before {
+	content: "— ";
+}
+
+.snowweb-prose img {
+	border-radius: 4px;
+}
+
+.snowweb-prose figcaption {
+	margin-top: 6px;
+	font-size: 13px;
+	color: var(--sw-sub);
+	text-align: center;
+}
+
+.snowweb-prose figure {
+	margin-inline: 0;
+}
+
+/* 表：スマホでも列を潰さず、横にスライド */
+.snowweb-prose .wp-block-table {
+	overflow-x: auto;
+}
+
+.snowweb-prose table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.92em;
+}
+
+.snowweb-prose th,
+.snowweb-prose td {
+	min-width: 6em;
+	padding: 8px 12px;
+	border: 1px solid var(--sw-line);
+	text-align: left;
+	vertical-align: top;
+}
+
+.snowweb-prose th {
+	background: var(--sw-soft);
+	white-space: nowrap;
+}
+
+.snowweb-prose .wp-block-table thead {
+	border-bottom: 0;
+}
+
+@media (max-width: 600px) {
+	.snowweb-prose th,
+	.snowweb-prose td {
+		min-width: 9em;
+	}
+}
+
+.snowweb-prose strong {
+	font-weight: 700;
+}
+
+.snowweb-prose :not(pre) > code {
+	padding: 1px 6px;
+	border: 1px solid var(--sw-line);
+	border-radius: 3px;
+	background: var(--sw-soft);
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.88em;
+}
+
+/* 黄色いマーカー（「ハイライト」で付けた色より優先） */
+.snowweb-prose mark {
+	background: linear-gradient(transparent 60%, var(--sw-marker) 60%) !important;
+	color: inherit !important;
+	font-weight: 700;
+	padding: 0 2px;
+}
+
+/* ソースコード */
+.snowweb-prose .wp-block-code,
+.snowweb-prose pre {
+	padding: 16px 20px;
+	border: 0;
+	border-radius: var(--sw-radius);
+	background: #1e2230;
+	color: #e6e9f5;
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 13.5px;
+	line-height: 1.7;
+	overflow-x: auto;
+}
+
+.snowweb-prose .wp-block-separator {
+	margin-block: 2.4em;
+	border: 0;
+	border-top: 1px solid var(--sw-line);
+	opacity: 1;
+}
+
+.snowweb-prose .wp-block-button__link {
+	padding: 12px 28px;
+	font-weight: 700;
+}
+
+/* ===== フッター ===== */
+.snowweb-footer {
+	background: var(--sw-footer);
+	color: var(--sw-footer-text);
+	font-size: 12.5px;
+}
+
+.snowweb-footer__inner {
+	gap: 16px 24px;
+	padding-block: 44px 36px;
+}
+
+.snowweb-footer__brand {
+	margin: 0;
+	color: var(--sw-footer-text);
+	font-size: 18px;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	filter: brightness(1.3);
+}
+
+.snowweb-footer__nav .wp-block-navigation__container {
+	gap: 6px 24px;
+}
+
+.snowweb-footer__nav .wp-block-navigation-item::before {
+	content: "» ";
+	color: #888;
+}
+
+.snowweb-footer a,
+.snowweb-footer .wp-block-navigation-item__content {
+	color: var(--sw-footer-text);
+}
+
+.snowweb-footer a:hover {
+	color: var(--sw-footer-text);
+	text-decoration: underline;
+}
+
+.snowweb-footer__copy {
+	margin: 0;
+	padding: 14px 0 18px;
+	border-top: 1px solid rgb(127 127 127 / 20%);
+	color: var(--sw-footer-text);
+	opacity: 0.7;
+	font-size: 11px;
+	text-align: center;
+}
+
+/* ===== 404 ===== */
+.snowweb-404 .wp-block-search {
+	margin-top: 24px;
 }

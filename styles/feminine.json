@@ -5,25 +5,97 @@
 	"settings": {
 		"color": {
 			"palette": [
-				{ "slug": "page", "name": "ページの地", "color": "#fdf6f7" },
-				{ "slug": "base", "name": "背景", "color": "#ffffff" },
-				{ "slug": "contrast", "name": "文字", "color": "#5a4a4f" },
-				{ "slug": "sub", "name": "補助の文字", "color": "#a8979c" },
-				{ "slug": "line", "name": "線", "color": "#f1dfe3" },
-				{ "slug": "primary", "name": "見出しの線", "color": "#e8a0b0" },
-				{ "slug": "link", "name": "リンク", "color": "#c9718a" },
-				{ "slug": "accent", "name": "アクセント", "color": "#b9a3d6" },
-				{ "slug": "footer", "name": "フッター", "color": "#f4e4e8" },
-				{ "slug": "footer-text", "name": "フッターの文字", "color": "#7a6a6f" }
+				{
+					"slug": "page",
+					"name": "ページの地",
+					"color": "#fdf6f7"
+				},
+				{
+					"slug": "base",
+					"name": "背景（箱）",
+					"color": "#ffffff"
+				},
+				{
+					"slug": "contrast",
+					"name": "文字",
+					"color": "#5a4a4f"
+				},
+				{
+					"slug": "sub",
+					"name": "補助の文字",
+					"color": "#a8979c"
+				},
+				{
+					"slug": "line",
+					"name": "線",
+					"color": "#f1dfe3"
+				},
+				{
+					"slug": "soft",
+					"name": "うすい地",
+					"color": "#fdf0f3"
+				},
+				{
+					"slug": "dark",
+					"name": "濃い色（ラベル・カテゴリー）",
+					"color": "#c9718a"
+				},
+				{
+					"slug": "title",
+					"name": "記事タイトル",
+					"color": "#7a5a63"
+				},
+				{
+					"slug": "primary",
+					"name": "見出しの線",
+					"color": "#e8a0b0"
+				},
+				{
+					"slug": "h2-bg",
+					"name": "大見出しの地",
+					"color": "#fbeef1"
+				},
+				{
+					"slug": "check",
+					"name": "小見出しの印",
+					"color": "#c9718a"
+				},
+				{
+					"slug": "link",
+					"name": "リンク",
+					"color": "#c9718a"
+				},
+				{
+					"slug": "link-hover",
+					"name": "リンク（ホバー）",
+					"color": "#a9546d"
+				},
+				{
+					"slug": "accent",
+					"name": "アクセント",
+					"color": "#b9a3d6"
+				},
+				{
+					"slug": "marker",
+					"name": "マーカー",
+					"color": "#ffd6e0"
+				},
+				{
+					"slug": "footer",
+					"name": "フッター",
+					"color": "#f4e4e8"
+				},
+				{
+					"slug": "footer-text",
+					"name": "フッターの文字",
+					"color": "#7a6a6f"
+				}
 			]
-		}
-	},
-	"styles": {
-		"elements": {
-			"h2": {
-				"color": { "background": "#fbeef1" },
-				"border": { "radius": "12px" }
-			}
+		},
+		"custom": {
+			"radius": "12px",
+			"heading-radius": "10px",
+			"shadow": "0 2px 10px rgb(201 113 138 / 10%)"
 		}
 	}
 }

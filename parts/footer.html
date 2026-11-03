@@ -1,7 +1,13 @@
-<!-- wp:group {"tagName":"footer","style":{"spacing":{"padding":{"top":"32px","bottom":"32px"}}},"backgroundColor":"footer","textColor":"footer-text","layout":{"type":"constrained"}} -->
-<footer class="wp-block-group has-footer-text-color has-footer-background-color has-text-color has-background" style="padding-top:32px;padding-bottom:32px">
-<!-- wp:paragraph {"align":"center","fontSize":"small"} -->
-<p class="has-text-align-center has-small-font-size">Powered by snowweb</p>
+<!-- wp:group {"tagName":"footer","className":"snowweb-footer","layout":{"type":"default"}} -->
+<footer class="wp-block-group snowweb-footer">
+<!-- wp:group {"className":"snowweb-footer__inner","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group snowweb-footer__inner">
+<!-- wp:site-title {"level":0,"isLink":false,"className":"snowweb-footer__brand"} /-->
+<!-- wp:navigation {"overlayMenu":"never","className":"snowweb-footer__nav","layout":{"type":"flex","justifyContent":"right"}} /-->
+</div>
+<!-- /wp:group -->
+<!-- wp:paragraph {"className":"snowweb-footer__copy"} -->
+<p class="snowweb-footer__copy">Powered by snowweb</p>
 <!-- /wp:paragraph -->
 </footer>
 <!-- /wp:group -->

@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SNOWWEB_VERSION', '0.0.0.3' );
+define( 'SNOWWEB_VERSION', '0.0.0.4' );
 
 /**
  * テーマの基本機能を有効にする。

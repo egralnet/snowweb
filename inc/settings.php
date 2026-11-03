@@ -29,7 +29,7 @@ function snowweb_settings_schema() {
 		'layout_columns'                  => array(
 			'tab'     => 'general',
 			'type'    => 'choice',
-			'default' => '1',
+			'default' => '2',
 			'choices' => array( '1', '2' ),
 		),
 		'layout_sidebar'                  => array(

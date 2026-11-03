@@ -1,9 +1,14 @@
-<!-- wp:group {"tagName":"header","style":{"spacing":{"padding":{"top":"20px","bottom":"20px"}}},"backgroundColor":"base","layout":{"type":"constrained"}} -->
-<header class="wp-block-group has-base-background-color has-background" style="padding-top:20px;padding-bottom:20px">
-<!-- wp:group {"layout":{"type":"flex","justifyContent":"space-between","flexWrap":"wrap"}} -->
-<div class="wp-block-group">
-<!-- wp:site-title {"level":0} /-->
-<!-- wp:navigation {"overlayMenu":"mobile"} /-->
+<!-- wp:group {"tagName":"header","className":"snowweb-header","layout":{"type":"default"}} -->
+<header class="wp-block-group snowweb-header">
+<!-- wp:group {"className":"snowweb-header__inner","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+<div class="wp-block-group snowweb-header__inner">
+<!-- wp:group {"className":"snowweb-brand","layout":{"type":"flex","flexWrap":"wrap"}} -->
+<div class="wp-block-group snowweb-brand">
+<!-- wp:site-title {"level":0,"className":"snowweb-brand__name"} /-->
+<!-- wp:site-tagline {"className":"snowweb-brand__tagline"} /-->
+</div>
+<!-- /wp:group -->
+<!-- wp:navigation {"overlayMenu":"mobile","className":"snowweb-nav","layout":{"type":"flex","justifyContent":"right"}} /-->
 </div>
 <!-- /wp:group -->
 </header>
