@@ -8,3 +8,60 @@
 	display: grid;
 	gap: 24px;
 }
+
+/* ===== レイアウト（snowweb設定 → 全体） ===== */
+.snowweb-layout {
+	box-sizing: border-box;
+	max-width: var(--wp--style--global--wide-size, 1200px);
+	margin-inline: auto;
+	padding-inline: 16px;
+}
+
+/* 2カラム：記事と右（または左）のサイドバー */
+body.snowweb-col-2 .snowweb-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 300px;
+	gap: 48px;
+	align-items: start;
+}
+
+body.snowweb-col-2.snowweb-sidebar-left .snowweb-layout {
+	grid-template-columns: 300px minmax(0, 1fr);
+}
+
+body.snowweb-col-2.snowweb-sidebar-left .snowweb-sidebar {
+	order: -1;
+}
+
+/* 2カラムでは記事を横幅いっぱいに使う */
+body.snowweb-col-2 .snowweb-main.is-layout-constrained > * {
+	max-width: none;
+}
+
+.snowweb-sidebar {
+	display: grid;
+	gap: 24px;
+}
+
+.snowweb-widget {
+	border-radius: 3px;
+	box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+.snowweb-widget-title {
+	margin-top: 0;
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+/* スマートフォン・タブレット：サイドバーは記事の下へ */
+@media (max-width: 960px) {
+	body.snowweb-col-2 .snowweb-layout,
+	body.snowweb-col-2.snowweb-sidebar-left .snowweb-layout {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 32px;
+	}
+
+	body.snowweb-col-2.snowweb-sidebar-left .snowweb-sidebar {
+		order: 0;
+	}
+}

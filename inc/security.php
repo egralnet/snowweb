@@ -5,7 +5,8 @@
  * 締め出し事故に備え、wp-config.php に次の 1 行を書くと全機能が止まります。
  *   define( 'SNOWWEB_SAFE_MODE', true );
  *
- * 個別に止めたいときは、子テーマなどで次のフィルターに false を返します。
+ * 個別のオン・オフは、管理画面の「snowweb設定 → セキュリティ」で切り替えます。
+ * 子テーマなどから変えたいときは、次のフィルターを使います。
  *   add_filter( 'snowweb_security_enabled', function ( $on, $feature ) { ... }, 10, 2 );
  *
  * @package snowweb
@@ -14,16 +15,34 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * セーフモードかどうかを返す。
+ *
+ * @return bool
+ */
+function snowweb_is_safe_mode() {
+	return defined( 'SNOWWEB_SAFE_MODE' ) && SNOWWEB_SAFE_MODE;
+}
+
+/**
  * 機能が有効かどうかを返す。
  *
  * @param string $feature 機能名。
  * @return bool
  */
 function snowweb_security_enabled( $feature ) {
-	if ( defined( 'SNOWWEB_SAFE_MODE' ) && SNOWWEB_SAFE_MODE ) {
+	if ( snowweb_is_safe_mode() ) {
 		return false;
 	}
-	return (bool) apply_filters( 'snowweb_security_enabled', true, $feature );
+
+	$enabled = snowweb_get_setting( 'security_' . $feature );
+
+	/**
+	 * セキュリティ機能のオン・オフを変えるフィルター。
+	 *
+	 * @param bool   $enabled 有効なら true。
+	 * @param string $feature 機能名。
+	 */
+	return (bool) apply_filters( 'snowweb_security_enabled', null === $enabled ? true : (bool) $enabled, $feature );
 }
 
 /*

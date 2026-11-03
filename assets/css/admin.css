@@ -1,0 +1,14 @@
+/* snowweb設定の画面 */
+.snowweb-admin .nav-tab-wrapper {
+	margin-bottom: 8px;
+}
+
+.snowweb-admin .snowweb-choice {
+	display: inline-block;
+	margin-right: 20px;
+	margin-bottom: 4px;
+}
+
+.snowweb-admin .description {
+	max-width: 640px;
+}

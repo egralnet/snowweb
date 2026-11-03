@@ -68,6 +68,7 @@
 	},
 	"templateParts": [
 		{ "name": "header", "title": "ヘッダー", "area": "header" },
-		{ "name": "footer", "title": "フッター", "area": "footer" }
+		{ "name": "footer", "title": "フッター", "area": "footer" },
+		{ "name": "sidebar", "title": "サイドバー", "area": "uncategorized" }
 	]
 }
