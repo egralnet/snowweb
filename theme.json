@@ -1,0 +1,73 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"layout": { "contentSize": "760px", "wideSize": "1200px" },
+		"color": {
+			"defaultPalette": false,
+			"palette": [
+				{ "slug": "page", "name": "ページの地", "color": "#f3f3f3" },
+				{ "slug": "base", "name": "背景", "color": "#ffffff" },
+				{ "slug": "contrast", "name": "文字", "color": "#333333" },
+				{ "slug": "sub", "name": "補助の文字", "color": "#999999" },
+				{ "slug": "line", "name": "線", "color": "#e3e3e3" },
+				{ "slug": "primary", "name": "見出しの線", "color": "#5064ad" },
+				{ "slug": "link", "name": "リンク", "color": "#3d79c4" },
+				{ "slug": "accent", "name": "アクセント", "color": "#b8933a" },
+				{ "slug": "footer", "name": "フッター", "color": "#222222" },
+				{ "slug": "footer-text", "name": "フッターの文字", "color": "#c9ced6" }
+			]
+		},
+		"typography": {
+			"fontFamilies": [
+				{
+					"slug": "body",
+					"name": "ゴシック",
+					"fontFamily": "\"Hiragino Kaku Gothic ProN\", \"Hiragino Sans\", \"Noto Sans JP\", \"Yu Gothic Medium\", \"Yu Gothic\", Meiryo, sans-serif"
+				},
+				{
+					"slug": "mono",
+					"name": "等幅",
+					"fontFamily": "\"SFMono-Regular\", Menlo, Consolas, \"Liberation Mono\", monospace"
+				}
+			],
+			"fontSizes": [
+				{ "slug": "small", "name": "小", "size": "14px" },
+				{ "slug": "medium", "name": "標準", "size": "18px" },
+				{ "slug": "large", "name": "大", "size": "21px" },
+				{ "slug": "x-large", "name": "特大", "size": "24px" }
+			]
+		},
+		"spacing": { "units": [ "px", "em", "rem", "%", "vw" ] }
+	},
+	"styles": {
+		"color": { "background": "var(--wp--preset--color--page)", "text": "var(--wp--preset--color--contrast)" },
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--body)",
+			"fontSize": "var(--wp--preset--font-size--medium)",
+			"lineHeight": "1.9"
+		},
+		"elements": {
+			"link": {
+				"color": { "text": "var(--wp--preset--color--link)" },
+				":hover": { "color": { "text": "#2a5c9c" } }
+			},
+			"h2": {
+				"color": { "background": "#f4f4f4" },
+				"border": { "left": { "color": "var(--wp--preset--color--primary)", "width": "4px", "style": "solid" } },
+				"spacing": { "padding": { "top": "0.5em", "bottom": "0.5em", "left": "0.8em", "right": "0.8em" } }
+			}
+		},
+		"blocks": {
+			"core/code": {
+				"color": { "background": "#1e2230", "text": "#e6e9f5" },
+				"typography": { "fontFamily": "var(--wp--preset--font-family--mono)" }
+			}
+		}
+	},
+	"templateParts": [
+		{ "name": "header", "title": "ヘッダー", "area": "header" },
+		{ "name": "footer", "title": "フッター", "area": "footer" }
+	]
+}

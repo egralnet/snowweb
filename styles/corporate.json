@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.6/theme.json",
+	"version": 3,
+	"title": "コーポレート",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "page", "name": "ページの地", "color": "#f5f7fa" },
+				{ "slug": "base", "name": "背景", "color": "#ffffff" },
+				{ "slug": "contrast", "name": "文字", "color": "#1f2933" },
+				{ "slug": "sub", "name": "補助の文字", "color": "#7b8794" },
+				{ "slug": "line", "name": "線", "color": "#d9e2ec" },
+				{ "slug": "primary", "name": "見出しの線", "color": "#0b3d91" },
+				{ "slug": "link", "name": "リンク", "color": "#0b3d91" },
+				{ "slug": "accent", "name": "アクセント", "color": "#c99a2e" },
+				{ "slug": "footer", "name": "フッター", "color": "#0b1f3a" },
+				{ "slug": "footer-text", "name": "フッターの文字", "color": "#d9e2ec" }
+			]
+		}
+	},
+	"styles": {
+		"typography": { "lineHeight": "1.8" },
+		"elements": { "h2": { "color": { "background": "#eef2f7" } } }
+	}
+}

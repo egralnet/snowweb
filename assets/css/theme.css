@@ -1,0 +1,10 @@
+/* theme.json で表せない細かな装飾 */
+.snowweb-card {
+	border-radius: 3px;
+	box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+}
+
+.wp-block-post-template {
+	display: grid;
+	gap: 24px;
+}
