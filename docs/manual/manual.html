@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>snowweb つかいかたガイド</title>
+<style>
+@page { size: A4; margin: 0; }
+:root {
+	--ink: #2b2f36; --sub: #6b7280; --line: #e3e6ea; --soft: #f4f6f9;
+	--blue: #5064ad; --blue2: #3d79c4; --navy: #0b3d91; --pink: #e8a0b0; --pink2: #c9718a;
+	--yellow: #ffe58a; --green: #3aa776; --red: #d9534f; --dark: #333;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: "IPAPGothic", "IPAGothic", sans-serif; color: var(--ink); font-size: 13.5pt; line-height: 1.85; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 210mm; height: 297mm; padding: 16mm 17mm 14mm; position: relative; overflow: hidden; page-break-after: always; background: #fff; }
+.page:last-child { page-break-after: auto; }
+.page-no { position: absolute; bottom: 8mm; left: 0; right: 0; text-align: center; font-size: 9pt; color: var(--sub); }
+.chapter { display: inline-block; padding: 2px 14px; border-radius: 999px; background: var(--dark); color: #fff; font-size: 10pt; font-weight: bold; letter-spacing: .1em; }
+h1 { margin: 6px 0 4mm; font-size: 22pt; line-height: 1.4; padding: 4px 0 6px 14px; border-left: 9px solid var(--blue); background: var(--soft); }
+h2 { margin: 6mm 0 2mm; font-size: 14.5pt; padding-left: 12px; border-left: 6px solid var(--blue); line-height: 1.5; }
+h3 { margin: 4mm 0 1mm; font-size: 12.5pt; }
+p { margin: 0 0 3mm; }
+.small { font-size: 10.5pt; color: var(--sub); }
+mark { background: linear-gradient(transparent 55%, var(--yellow) 55%); color: inherit; font-weight: bold; padding: 0 2px; }
+.box { border: 2px solid var(--line); border-radius: 10px; padding: 4mm 5mm; margin: 3mm 0; background: #fff; }
+.box.blue { border-color: #c8d1ee; background: #f5f7fd; }
+.box.warn { border-color: #f3c6c4; background: #fff6f5; }
+.box.ok { border-color: #bfe3d2; background: #f3fbf7; }
+.box-title { font-weight: bold; margin-bottom: 1mm; }
+.steps { counter-reset: s; list-style: none; padding: 0; margin: 2mm 0; }
+.steps > li { counter-increment: s; position: relative; padding: 0 0 3mm 13mm; min-height: 10mm; }
+.steps > li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 9mm; height: 9mm; border-radius: 50%; background: var(--blue); color: #fff; font-weight: bold; display: grid; place-items: center; font-size: 13pt; }
+.menu { display: inline-block; padding: 0 7px; border: 1px solid #c9ced6; border-radius: 4px; background: #f7f8fa; font-size: 11.5pt; line-height: 1.6; white-space: nowrap; }
+code { font-family: "IPAGothic", monospace; background: #1e2230; color: #e6e9f5; padding: 2px 8px; border-radius: 4px; font-size: 11pt; }
+.code-block { background: #1e2230; color: #e6e9f5; border-radius: 8px; padding: 4mm 5mm; font-family: "IPAGothic", monospace; font-size: 11.5pt; margin: 2mm 0 3mm; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+.center { text-align: center; }
+.say { display: flex; gap: 4mm; align-items: flex-start; margin: 3mm 0; }
+.say svg { flex: none; width: 22mm; height: 22mm; }
+.bubble { position: relative; flex: 1; background: #eef3ff; border-radius: 12px; padding: 3mm 5mm; font-size: 12pt; }
+.bubble::before { content: ""; position: absolute; left: -9px; top: 8mm; border: 6px solid transparent; border-right: 10px solid #eef3ff; }
+.card { border: 2px solid var(--line); border-radius: 10px; padding: 3mm 4mm; text-align: center; background: #fff; }
+.card h3 { margin: 1mm 0; }
+.card p { font-size: 11pt; margin: 0; }
+table { width: 100%; border-collapse: collapse; font-size: 11.5pt; margin: 2mm 0 3mm; }
+th, td { border: 1px solid var(--line); padding: 2mm 3mm; text-align: left; vertical-align: top; line-height: 1.6; }
+th { background: var(--soft); white-space: nowrap; }
+.tag { display: inline-block; padding: 0 8px; border-radius: 4px; font-size: 10pt; font-weight: bold; color: #fff; background: var(--green); }
+.tag.off { background: #9aa1ab; }
+/* 表紙 */
+.cover { background: linear-gradient(170deg, #eaf1ff 0%, #ffffff 55%, #fdf0f3 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.cover .title { font-size: 40pt; font-weight: bold; letter-spacing: .12em; margin: 6mm 0 0; color: var(--dark); }
+.cover .subtitle { font-size: 18pt; margin: 2mm 0 8mm; }
+.cover .ver { display: inline-block; padding: 2px 18px; border-radius: 999px; background: var(--dark); color: #fff; font-size: 12pt; letter-spacing: .1em; }
+.cover .for { margin-top: 12mm; font-size: 12pt; color: var(--sub); line-height: 2; }
+.toc-list { list-style: none; padding: 0; margin: 4mm 0; font-size: 13pt; }
+.toc-list li { display: flex; gap: 3mm; padding: 2.2mm 0; border-bottom: 1px dashed var(--line); }
+.toc-list li span:first-child { font-weight: bold; color: var(--blue); width: 9mm; }
+.toc-list li span:last-child { margin-left: auto; color: var(--sub); }
+</style>
+</head>
+<body>
+
+<!-- マスコット（ゆきだま）：何度も使うので部品にしておく -->
+<svg width="0" height="0" style="position:absolute">
+	<defs>
+		<symbol id="yuki" viewBox="0 0 100 100">
+			<ellipse cx="50" cy="94" rx="30" ry="4" fill="#000" opacity=".08"/>
+			<circle cx="50" cy="52" r="40" fill="#fff" stroke="#bcd0f0" stroke-width="3"/>
+			<circle cx="36" cy="48" r="5" fill="#2b2f36"/>
+			<circle cx="64" cy="48" r="5" fill="#2b2f36"/>
+			<circle cx="37.5" cy="46.5" r="1.6" fill="#fff"/>
+			<circle cx="65.5" cy="46.5" r="1.6" fill="#fff"/>
+			<path d="M41 62 Q50 70 59 62" stroke="#2b2f36" stroke-width="3" fill="none" stroke-linecap="round"/>
+			<ellipse cx="27" cy="60" rx="6" ry="4" fill="#ffb3c1" opacity=".7"/>
+			<ellipse cx="73" cy="60" rx="6" ry="4" fill="#ffb3c1" opacity=".7"/>
+			<g transform="translate(50 14)" stroke="#5aa0e6" stroke-width="3" stroke-linecap="round">
+				<line x1="0" y1="-9" x2="0" y2="9"/><line x1="-8" y1="-4.5" x2="8" y2="4.5"/><line x1="-8" y1="4.5" x2="8" y2="-4.5"/>
+			</g>
+		</symbol>
+		<symbol id="shield" viewBox="0 0 100 100">
+			<path d="M50 6 L86 20 V48 C86 72 70 88 50 95 C30 88 14 72 14 48 V20 Z" fill="#5064ad"/>
+			<path d="M50 14 L78 25 V48 C78 67 66 80 50 86 Z" fill="#6a83cf"/>
+			<path d="M34 50 L46 62 L68 38" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+		</symbol>
+	</defs>
+</svg>
+
+<!-- ===== 表紙 ===== -->
+<section class="page cover">
+	<svg width="190" height="190" viewBox="0 0 100 100"><use href="#yuki"/></svg>
+	<p class="title">snowweb</p>
+	<p class="subtitle">スノーウェブ　つかいかたガイド</p>
+	<span class="ver">バージョン 0.0.0.5</span>
+	<svg width="560" height="150" viewBox="0 0 560 150" style="margin-top:12mm">
+		<!-- 3つのパソコン画面（デザイン3種） -->
+		<g transform="translate(10 10)">
+			<rect width="160" height="110" rx="8" fill="#fff" stroke="#c9ced6" stroke-width="2"/>
+			<rect x="0" y="0" width="160" height="18" rx="8" fill="#333"/><rect x="0" y="10" width="160" height="8" fill="#333"/>
+			<rect x="10" y="28" width="95" height="10" fill="#f4f4f4"/><rect x="10" y="28" width="4" height="10" fill="#5064ad"/>
+			<rect x="10" y="44" width="95" height="5" rx="2" fill="#ddd"/><rect x="10" y="54" width="80" height="5" rx="2" fill="#ddd"/>
+			<rect x="10" y="66" width="44" height="30" fill="#5ab0d6"/><rect x="60" y="66" width="44" height="30" fill="#7fc3e0"/>
+			<rect x="114" y="28" width="38" height="68" fill="#333"/>
+			<text x="80" y="135" text-anchor="middle" font-size="13" fill="#2b2f36">標準</text>
+		</g>
+		<g transform="translate(200 10)">
+			<rect width="160" height="110" rx="8" fill="#f5f7fa" stroke="#c9ced6" stroke-width="2"/>
+			<rect x="0" y="0" width="160" height="18" rx="8" fill="#0b1f3a"/><rect x="0" y="10" width="160" height="8" fill="#0b1f3a"/>
+			<rect x="10" y="28" width="95" height="10" fill="#eef2f7"/><rect x="10" y="28" width="4" height="10" fill="#0b3d91"/>
+			<rect x="10" y="44" width="95" height="5" rx="2" fill="#d9e2ec"/><rect x="10" y="54" width="80" height="5" rx="2" fill="#d9e2ec"/>
+			<rect x="10" y="66" width="44" height="30" fill="#0b3d91"/><rect x="60" y="66" width="44" height="30" fill="#c99a2e"/>
+			<rect x="114" y="28" width="38" height="68" fill="#0b1f3a"/>
+			<text x="80" y="135" text-anchor="middle" font-size="13" fill="#2b2f36">コーポレート</text>
+		</g>
+		<g transform="translate(390 10)">
+			<rect width="160" height="110" rx="14" fill="#fdf6f7" stroke="#f1dfe3" stroke-width="2"/>
+			<rect x="0" y="0" width="160" height="18" rx="10" fill="#f4e4e8"/>
+			<rect x="10" y="28" width="95" height="10" rx="5" fill="#fbeef1"/><rect x="10" y="28" width="4" height="10" fill="#e8a0b0"/>
+			<rect x="10" y="44" width="95" height="5" rx="2" fill="#f1dfe3"/><rect x="10" y="54" width="80" height="5" rx="2" fill="#f1dfe3"/>
+			<rect x="10" y="66" width="44" height="30" rx="8" fill="#e8a0b0"/><rect x="60" y="66" width="44" height="30" rx="8" fill="#b9a3d6"/>
+			<rect x="114" y="28" width="38" height="68" rx="8" fill="#c9718a"/>
+			<text x="80" y="135" text-anchor="middle" font-size="13" fill="#2b2f36">やさしい</text>
+		</g>
+	</svg>
+	<p class="for">ワードプレスで、ブログや会社のホームページを作る人のための説明書です。<br>はじめての人でもわかるように、ひとつずつ説明します。</p>
+</section>
+
+<!-- ===== もくじ ===== -->
+<section class="page">
+	<span class="chapter">もくじ</span>
+	<h1>この説明書の内容</h1>
+	<ol class="toc-list">
+		<li><span>1</span><span>snowweb（スノーウェブ）ってなに？</span><span>3</span></li>
+		<li><span>2</span><span>使う前に準備すること</span><span>4</span></li>
+		<li><span>3</span><span>テーマを入れる（インストール）</span><span>5</span></li>
+		<li><span>4</span><span>「snowweb設定」の場所</span><span>6</span></li>
+		<li><span>5</span><span>全体：見た目を1クリックで変える</span><span>7</span></li>
+		<li><span>6</span><span>記事：読みやすくする機能</span><span>8</span></li>
+		<li><span>7</span><span>SEO・アクセス解析：見つけてもらう、数える</span><span>9</span></li>
+		<li><span>8</span><span>広告：広告をのせる</span><span>10</span></li>
+		<li><span>9</span><span>セキュリティ：サイトを守る</span><span>11</span></li>
+		<li><span>10</span><span>設定の保存と、困ったとき</span><span>12</span></li>
+		<li><span>11</span><span>ことばの説明（用語集）</span><span>13</span></li>
+	</ol>
+	<div class="say">
+		<svg viewBox="0 0 100 100"><use href="#yuki"/></svg>
+		<div class="bubble">こんにちは、案内役の<b>ゆきだま</b>です！<br>わからないことばが出てきたら、最後の「用語集」を見てね。</div>
+	</div>
+	<div class="box blue">
+		<div class="box-title">この説明書の読み方</div>
+		<p style="margin:0"><span class="menu">外観</span> → <span class="menu">テーマ</span> のような四角い文字は、<b>管理画面のボタンやメニューの名前</b>です。左から順番にクリックしてください。</p>
+	</div>
+	<p class="page-no">2</p>
+</section>
+
+<!-- ===== 1 ===== -->
+<section class="page">
+	<span class="chapter">第1章</span>
+	<h1>snowweb（スノーウェブ）ってなに？</h1>
+	<p>ワードプレスは、ホームページを作るための道具です。ワードプレスを<mark>お家</mark>とすると、<b>テーマ</b>はお家の<mark>内装や家具</mark>のようなものです。テーマを変えると、中身（記事）はそのままで、見た目だけががらっと変わります。</p>
+	<svg width="100%" height="215" viewBox="0 0 640 215">
+		<!-- 家 -->
+		<g transform="translate(30 10)">
+			<polygon points="90,0 180,60 0,60" fill="#9aa8c9"/>
+			<rect x="15" y="60" width="150" height="110" fill="#eef1f8" stroke="#9aa8c9" stroke-width="3"/>
+			<rect x="35" y="80" width="45" height="35" fill="#fff" stroke="#9aa8c9" stroke-width="2"/>
+			<rect x="100" y="100" width="40" height="70" fill="#c8d1ee"/>
+			<text x="90" y="186" text-anchor="middle" font-size="15" fill="#2b2f36">ワードプレス＝お家</text>
+		</g>
+		<text x="250" y="105" font-size="40" fill="#5064ad">＋</text>
+		<!-- 家具 -->
+		<g transform="translate(300 40)">
+			<rect x="0" y="60" width="120" height="40" rx="10" fill="#e8a0b0"/>
+			<rect x="10" y="40" width="100" height="30" rx="10" fill="#f1c0cb"/>
+			<rect x="150" y="10" width="40" height="90" fill="#c99a2e"/>
+			<circle cx="170" cy="0" r="18" fill="#ffe58a"/>
+			<text x="95" y="156" text-anchor="middle" font-size="15" fill="#2b2f36">snowweb＝内装・家具</text>
+		</g>
+		<text x="520" y="105" font-size="40" fill="#5064ad">＝</text>
+		<g transform="translate(560 60)"><use href="#yuki" width="70" height="70"/></g><text x="595" y="196" text-anchor="middle" font-size="15" fill="#2b2f36">あなたのサイト</text>
+	</svg>
+	<h2>snowweb の3つのとくちょう</h2>
+	<div class="grid3">
+		<div class="card">
+			<svg width="80" height="70" viewBox="0 0 80 70"><rect x="5" y="10" width="30" height="45" rx="4" fill="#5064ad"/><rect x="45" y="10" width="30" height="45" rx="10" fill="#e8a0b0"/><path d="M33 33 h14" stroke="#2b2f36" stroke-width="3"/><path d="M42 28 l6 5 -6 5" stroke="#2b2f36" stroke-width="3" fill="none"/></svg>
+			<h3>1クリックで着せかえ</h3>
+			<p>ブログ向け・会社向け・やさしい雰囲気の3つから選べます。</p>
+		</div>
+		<div class="card">
+			<svg width="80" height="70" viewBox="0 0 100 100"><use href="#shield"/></svg>
+			<h3>守りが強い</h3>
+			<p>悪い人にねらわれやすい入口を、最初から閉じています。</p>
+		</div>
+		<div class="card">
+			<svg width="80" height="70" viewBox="0 0 80 70"><rect x="10" y="5" width="60" height="60" rx="6" fill="#f4f6f9" stroke="#c9ced6" stroke-width="2"/><rect x="18" y="15" width="44" height="7" rx="3" fill="#333"/><rect x="18" y="29" width="44" height="7" rx="3" fill="#5064ad"/><rect x="18" y="43" width="30" height="7" rx="3" fill="#5064ad"/></svg>
+			<h3>設定がひとまとめ</h3>
+			<p>SEO・広告・アクセス解析まで、プラグインなしで設定できます。</p>
+		</div>
+	</div>
+	<div class="box">
+		<div class="box-title">AI が作り、みんなの報告で育つテーマです</div>
+		<p style="margin:0">snowweb は AI（人工知能）が作り、使っている人からの「ここがおかしいよ」という報告をもとに、直しながら新しくしていくテーマです。気になるところがあれば、ぜひ教えてください（12ページ）。</p>
+	</div>
+	<p class="page-no">3</p>
+</section>
+
+<!-- ===== 2 ===== -->
+<section class="page">
+	<span class="chapter">第2章</span>
+	<h1>使う前に準備すること</h1>
+	<h2>① ワードプレスとサーバーの条件</h2>
+	<table>
+		<tr><th>ワードプレス</th><td>バージョン <b>6.6 以上</b><br><span class="small">管理画面の左上の <span class="menu">ダッシュボード</span> → <span class="menu">更新</span> で確認できます。</span></td></tr>
+		<tr><th>PHP（ピーエイチピー）</th><td>バージョン <b>7.4 以上</b>（8.1 以上がおすすめ）<br><span class="small">サーバーの管理画面で確認・変更できます。わからないときは、レンタルサーバーの会社の説明を見てください。</span></td></tr>
+	</table>
+	<h2>② かならずバックアップをとる</h2>
+	<div class="grid2" style="align-items:center">
+		<svg width="100%" height="170" viewBox="0 0 300 170">
+			<rect x="20" y="30" width="110" height="80" rx="8" fill="#eef1f8" stroke="#9aa8c9" stroke-width="3"/>
+			<text x="75" y="76" text-anchor="middle" font-size="14" fill="#2b2f36">今のサイト</text>
+			<path d="M140 70 h40" stroke="#5064ad" stroke-width="5"/><path d="M172 58 l14 12 -14 12" stroke="#5064ad" stroke-width="5" fill="none"/>
+			<rect x="195" y="38" width="80" height="64" rx="6" fill="#ffe58a" stroke="#c99a2e" stroke-width="3"/>
+			<rect x="210" y="28" width="50" height="14" rx="3" fill="#c99a2e"/>
+			<text x="235" y="76" text-anchor="middle" font-size="14" fill="#2b2f36">コピー</text>
+			<text x="150" y="150" text-anchor="middle" font-size="13" fill="#6b7280">もしものときに、元にもどせる</text>
+		</svg>
+		<div>
+			<p>テーマを入れたり新しくしたりする前に、<mark>サイトのコピー（バックアップ）</mark>をとっておきましょう。</p>
+			<p class="small">多くのレンタルサーバーには「自動バックアップ」の機能があります。</p>
+		</div>
+	</div>
+	<h2>③ 練習用のサイトがあると安心</h2>
+	<p>本番のサイトとは別に、<b>練習用（検証用）のサイト</b>を用意して、そこで先に試すのがいちばん安全です。</p>
+	<div class="say">
+		<svg viewBox="0 0 100 100"><use href="#yuki"/></svg>
+		<div class="bubble">いきなり本番で試すのは、スキーでいきなり上級者コースに行くようなもの。まずは練習コースで！</div>
+	</div>
+	<p class="page-no">4</p>
+</section>
+
+<!-- ===== 3 ===== -->
+<section class="page">
+	<span class="chapter">第3章</span>
+	<h1>テーマを入れる（インストール）</h1>
+	<ol class="steps">
+		<li><b>テーマのファイル（zip）をダウンロードする</b><br>
+			GitHub（ギットハブ）のページを開いて、<span class="menu">Code</span> → <span class="menu">Download ZIP</span> をクリックします。<br>
+			<span class="small">github.com/egralnet/snowweb</span></li>
+		<li><b>管理画面でアップロードする</b><br>
+			<span class="menu">外観</span> → <span class="menu">テーマ</span> → <span class="menu">新しいテーマを追加</span> → <span class="menu">テーマのアップロード</span> と進み、ダウンロードした zip を選んで <span class="menu">今すぐインストール</span> を押します。</li>
+		<li><b>有効化する</b><br>
+			インストールが終わったら <span class="menu">有効化</span> を押します。これで snowweb に切りかわります。</li>
+	</ol>
+	<svg width="100%" height="230" viewBox="0 0 640 230">
+		<rect x="10" y="10" width="620" height="210" rx="10" fill="#fff" stroke="#c9ced6" stroke-width="2"/>
+		<rect x="10" y="10" width="140" height="210" rx="10" fill="#1d2327"/><rect x="140" y="10" width="10" height="210" fill="#1d2327"/>
+		<text x="30" y="45" font-size="13" fill="#c3c4c7">ダッシュボード</text>
+		<text x="30" y="75" font-size="13" fill="#c3c4c7">投稿</text>
+		<rect x="10" y="90" width="140" height="28" fill="#2271b1"/><text x="30" y="109" font-size="13" fill="#fff">外観</text>
+		<text x="44" y="138" font-size="12" fill="#fff">テーマ</text>
+		<text x="44" y="160" font-size="12" fill="#c3c4c7">エディター</text>
+		<text x="175" y="45" font-size="17" fill="#1d2327">テーマを追加</text>
+		<rect x="300" y="28" width="150" height="26" rx="4" fill="#fff" stroke="#2271b1" stroke-width="2"/><text x="375" y="46" text-anchor="middle" font-size="13" fill="#2271b1">テーマのアップロード</text>
+		<rect x="175" y="75" width="430" height="120" rx="6" fill="#f6f7f7" stroke="#c3c4c7" stroke-dasharray="6 4" stroke-width="2"/>
+		<text x="390" y="115" text-anchor="middle" font-size="14" fill="#1d2327">zip ファイルを選択</text>
+		<rect x="240" y="135" width="160" height="30" rx="4" fill="#fff" stroke="#c3c4c7"/><text x="320" y="155" text-anchor="middle" font-size="12" fill="#50575e">snowweb-main.zip</text>
+		<rect x="415" y="135" width="130" height="30" rx="4" fill="#2271b1"/><text x="480" y="155" text-anchor="middle" font-size="13" fill="#fff">今すぐインストール</text>
+		<circle cx="465" cy="41" r="13" fill="#d9534f"/><text x="465" y="46" text-anchor="middle" font-size="14" fill="#fff" font-weight="bold">2</text>
+	</svg>
+	<div class="box warn">
+		<div class="box-title">新しいバージョンに更新するとき</div>
+		<p style="margin:0">同じ手順で zip をアップロードすると「すでにあります。置きかえますか？」と出るので、<span class="menu">アップロードしたもので現在のものを置き換える</span> を押します。設定は消えません。</p>
+	</div>
+	<p class="page-no">5</p>
+</section>
+
+<!-- ===== 4 ===== -->
+<section class="page">
+	<span class="chapter">第4章</span>
+	<h1>「snowweb設定」の場所</h1>
+	<p>有効化すると、管理画面の左のメニューに<mark>盾（たて）のマークの「snowweb設定」</mark>が出てきます。snowweb の設定は、ほとんどここだけで終わります。</p>
+	<svg width="100%" height="250" viewBox="0 0 640 250">
+		<rect x="10" y="10" width="620" height="230" rx="10" fill="#fff" stroke="#c9ced6" stroke-width="2"/>
+		<rect x="10" y="10" width="150" height="230" rx="10" fill="#1d2327"/><rect x="150" y="10" width="10" height="230" fill="#1d2327"/>
+		<text x="30" y="45" font-size="13" fill="#c3c4c7">ダッシュボード</text><text x="30" y="75" font-size="13" fill="#c3c4c7">投稿</text><text x="30" y="105" font-size="13" fill="#c3c4c7">外観</text>
+		<rect x="10" y="118" width="150" height="30" fill="#2271b1"/>
+		<g transform="translate(22 121)"><use href="#shield" width="24" height="24"/></g>
+		<text x="52" y="138" font-size="13" fill="#fff">snowweb設定</text>
+		<text x="30" y="175" font-size="13" fill="#c3c4c7">プラグイン</text><text x="30" y="205" font-size="13" fill="#c3c4c7">設定</text>
+		<text x="185" y="45" font-size="18" fill="#1d2327">snowweb設定</text>
+		<g font-size="12.5">
+			<rect x="185" y="60" width="52" height="26" fill="#fff" stroke="#c3c4c7"/><text x="211" y="78" text-anchor="middle">全体</text>
+			<rect x="239" y="60" width="52" height="26" fill="#f0f0f1" stroke="#c3c4c7"/><text x="265" y="78" text-anchor="middle">記事</text>
+			<rect x="293" y="60" width="52" height="26" fill="#f0f0f1" stroke="#c3c4c7"/><text x="319" y="78" text-anchor="middle">SEO</text>
+			<rect x="347" y="60" width="52" height="26" fill="#f0f0f1" stroke="#c3c4c7"/><text x="373" y="78" text-anchor="middle">広告</text>
+			<rect x="401" y="60" width="88" height="26" fill="#f0f0f1" stroke="#c3c4c7"/><text x="445" y="78" text-anchor="middle">アクセス解析</text>
+			<rect x="491" y="60" width="82" height="26" fill="#f0f0f1" stroke="#c3c4c7"/><text x="532" y="78" text-anchor="middle">セキュリティ</text>
+		</g>
+		<text x="200" y="120" font-size="13" fill="#1d2327">カラム数</text><circle cx="300" cy="116" r="6" fill="none" stroke="#2271b1" stroke-width="2"/><text x="312" y="120" font-size="12">1カラム</text><circle cx="390" cy="116" r="6" fill="#2271b1"/><text x="402" y="120" font-size="12">2カラム</text>
+		<text x="200" y="155" font-size="13" fill="#1d2327">デザイン</text><circle cx="300" cy="151" r="6" fill="#2271b1"/><text x="312" y="155" font-size="12">標準</text><circle cx="370" cy="151" r="6" fill="none" stroke="#2271b1" stroke-width="2"/><text x="382" y="155" font-size="12">コーポレート</text>
+		<rect x="200" y="190" width="100" height="30" rx="4" fill="#2271b1"/><text x="250" y="210" text-anchor="middle" font-size="13" fill="#fff">設定を保存</text>
+		<circle cx="610" cy="73" r="0"/>
+	</svg>
+	<table>
+		<tr><th>全体</th><td>カラム数（1列・2列）、サイドバーの位置、デザインの着せかえ</td></tr>
+		<tr><th>記事</th><td>目次・シェアボタン・関連記事など、記事を読みやすくする機能</td></tr>
+		<tr><th>SEO</th><td>検索で見つけてもらうための設定</td></tr>
+		<tr><th>広告</th><td>Google アドセンスなどの広告の設定</td></tr>
+		<tr><th>アクセス解析</th><td>何人が見に来たかを数えるための設定</td></tr>
+		<tr><th>セキュリティ</th><td>サイトを守る機能のオン・オフ</td></tr>
+		<tr><th>設定の保存</th><td>設定をファイルに保存したり、もどしたりする</td></tr>
+	</table>
+	<div class="say">
+		<svg viewBox="0 0 100 100"><use href="#yuki"/></svg>
+		<div class="bubble">変えたら、さいごに青い <b>「設定を保存」</b> ボタンをわすれずに！タブごとに保存してね。</div>
+	</div>
+	<p class="page-no">6</p>
+</section>
+
+<!-- ===== 5 ===== -->
+<section class="page">
+	<span class="chapter">第5章</span>
+	<h1>全体：見た目を1クリックで変える</h1>
+	<h2>カラム数（列の数）</h2>
+	<div class="grid2">
+		<div class="card">
+			<svg width="200" height="120" viewBox="0 0 200 120"><rect x="5" y="5" width="190" height="110" rx="6" fill="#f3f3f3" stroke="#c9ced6"/><rect x="5" y="5" width="190" height="16" rx="6" fill="#fff"/><rect x="45" y="30" width="110" height="78" fill="#fff"/><rect x="55" y="40" width="90" height="6" fill="#ccc"/><rect x="55" y="52" width="80" height="6" fill="#ddd"/><rect x="55" y="64" width="85" height="6" fill="#ddd"/></svg>
+			<h3>1カラム</h3><p>記事だけを真ん中に表示。すっきり読ませたいときに。</p>
+		</div>
+		<div class="card">
+			<svg width="200" height="120" viewBox="0 0 200 120"><rect x="5" y="5" width="190" height="110" rx="6" fill="#f3f3f3" stroke="#c9ced6"/><rect x="5" y="5" width="190" height="16" rx="6" fill="#fff"/><rect x="15" y="30" width="115" height="78" fill="#fff"/><rect x="25" y="40" width="95" height="6" fill="#ccc"/><rect x="25" y="52" width="85" height="6" fill="#ddd"/><rect x="140" y="30" width="45" height="18" fill="#fff"/><rect x="140" y="52" width="45" height="30" fill="#333"/><rect x="140" y="86" width="45" height="22" fill="#fff"/></svg>
+			<h3>2カラム（はじめはこれ）</h3><p>右か左に「サイドバー」（検索・カテゴリーなど）を表示。</p>
+		</div>
+	</div>
+	<p class="small">スマートフォンでは、サイドバーは自動で記事の下にならびます。</p>
+	<h2>デザイン（着せかえ）</h2>
+	<div class="grid3">
+		<div class="card"><svg width="140" height="60" viewBox="0 0 140 60"><rect width="140" height="60" rx="6" fill="#f3f3f3"/><circle cx="25" cy="30" r="13" fill="#333"/><circle cx="55" cy="30" r="13" fill="#5064ad"/><circle cx="85" cy="30" r="13" fill="#3d79c4"/><circle cx="115" cy="30" r="13" fill="#fff" stroke="#ddd"/></svg><h3>標準</h3><p>白黒＋青。ブログ向け。ai-ski.net と同じ雰囲気。</p></div>
+		<div class="card"><svg width="140" height="60" viewBox="0 0 140 60"><rect width="140" height="60" rx="6" fill="#f5f7fa"/><circle cx="25" cy="30" r="13" fill="#0b1f3a"/><circle cx="55" cy="30" r="13" fill="#0b3d91"/><circle cx="85" cy="30" r="13" fill="#c99a2e"/><circle cx="115" cy="30" r="13" fill="#fff" stroke="#ddd"/></svg><h3>コーポレート</h3><p>紺色と金色。会社やお店のサイト向け。</p></div>
+		<div class="card"><svg width="140" height="60" viewBox="0 0 140 60"><rect width="140" height="60" rx="14" fill="#fdf6f7"/><circle cx="25" cy="30" r="13" fill="#c9718a"/><circle cx="55" cy="30" r="13" fill="#e8a0b0"/><circle cx="85" cy="30" r="13" fill="#b9a3d6"/><circle cx="115" cy="30" r="13" fill="#fff" stroke="#f1dfe3"/></svg><h3>やさしい</h3><p>ピンクとむらさき。角が丸い、やわらかい雰囲気。</p></div>
+	</div>
+	<div class="box warn">
+		<div class="box-title">ちゅうい</div>
+		<p style="margin:0">デザインを切りかえると、<span class="menu">外観</span> → <span class="menu">エディター</span> → <span class="menu">スタイル</span> で自分で変えた色や文字の設定は、上書きされて消えます。</p>
+	</div>
+	<p class="page-no">7</p>
+</section>
+
+<!-- ===== 6 ===== -->
+<section class="page">
+	<span class="chapter">第6章</span>
+	<h1>記事：読みやすくする機能</h1>
+	<p>オンにすると、記事のページに自動で次の部品が入ります。</p>
+	<svg width="100%" height="455" viewBox="0 0 640 455">
+		<rect x="120" y="5" width="400" height="445" rx="8" fill="#fff" stroke="#c9ced6" stroke-width="2"/>
+		<text x="140" y="32" font-size="11" fill="#999">ホーム ＞ ブログ運営 ＞ この記事</text>
+		<rect x="140" y="42" width="300" height="14" rx="3" fill="#666"/>
+		<text x="140" y="78" font-size="11" fill="#999">2026.11.03　更新 2026.11.05</text>
+		<rect x="390" y="66" width="34" height="16" rx="8" fill="#333"/><rect x="428" y="66" width="24" height="16" rx="8" fill="#fff" stroke="#ccc"/><rect x="456" y="66" width="30" height="16" rx="8" fill="#fff" stroke="#ccc"/>
+		<rect x="140" y="95" width="360" height="62" rx="3" fill="#f6f6f6" stroke="#e3e3e3"/><rect x="140" y="95" width="360" height="4" fill="#333"/>
+		<text x="155" y="118" font-size="12" fill="#333" font-weight="bold">目次</text><rect x="440" y="106" width="48" height="16" rx="8" fill="#333"/>
+		<rect x="155" y="130" width="160" height="6" fill="#bbb"/><rect x="165" y="142" width="130" height="6" fill="#ccc"/>
+		<rect x="140" y="170" width="360" height="22" fill="#f4f4f4"/><rect x="140" y="170" width="6" height="22" fill="#5064ad"/>
+		<rect x="140" y="202" width="350" height="6" fill="#ddd"/><rect x="140" y="214" width="320" height="6" fill="#ddd"/><rect x="140" y="226" width="340" height="6" fill="#ddd"/>
+		<g transform="translate(140 250)"><rect width="66" height="26" rx="3" fill="#fff" stroke="#ccc"/><rect x="73" width="66" height="26" rx="3" fill="#fff" stroke="#ccc"/><rect x="146" width="66" height="26" rx="3" fill="#fff" stroke="#ccc"/><rect x="219" width="66" height="26" rx="3" fill="#fff" stroke="#ccc"/><rect x="292" width="68" height="26" rx="3" fill="#fff" stroke="#ccc"/><text x="33" y="17" text-anchor="middle" font-size="10">X</text><text x="106" y="17" text-anchor="middle" font-size="10">Facebook</text><text x="179" y="17" text-anchor="middle" font-size="10">LINE</text><text x="252" y="17" text-anchor="middle" font-size="10">はてブ</text><text x="326" y="17" text-anchor="middle" font-size="10">コピー</text></g>
+		<rect x="140" y="292" width="360" height="62" rx="3" fill="#fff" stroke="#e3e3e3"/><circle cx="175" cy="323" r="20" fill="#bbb"/><rect x="210" y="310" width="270" height="6" fill="#ddd"/><rect x="210" y="322" width="240" height="6" fill="#ddd"/>
+		<rect x="140" y="370" width="175" height="60" fill="#5ab0d6"/><rect x="325" y="370" width="175" height="60" fill="#7fc3e0"/>
+		<g font-size="13" fill="#2b2f36">
+			<text x="5" y="32">パンくず</text><path d="M75 28 h60" stroke="#d9534f" stroke-width="2"/>
+			<text x="5" y="80">更新日</text><path d="M60 76 h75" stroke="#d9534f" stroke-width="2"/>
+			<text x="530" y="78">文字の大きさ</text><path d="M528 74 h-38" stroke="#d9534f" stroke-width="2"/>
+			<text x="5" y="128">目次</text><path d="M45 124 h90" stroke="#d9534f" stroke-width="2"/>
+			<text x="5" y="267">シェア</text><path d="M55 263 h80" stroke="#d9534f" stroke-width="2"/>
+			<text x="5" y="326">書いた人</text><path d="M75 322 h60" stroke="#d9534f" stroke-width="2"/>
+			<text x="5" y="403">関連記事</text><path d="M75 399 h60" stroke="#d9534f" stroke-width="2"/>
+		</g>
+	</svg>
+	<table>
+		<tr><th>目次</th><td>見出しが3つ以上ある記事に、自動で目次を入れます（数は変えられます）。</td></tr>
+		<tr><th>書いた人</th><td><span class="menu">ユーザー</span> → <span class="menu">プロフィール</span> の「プロフィール情報」に書いた文が出ます。</td></tr>
+		<tr><th>コピー対策 <span class="tag off">最初はオフ</span></th><td>本文を選んだりコピーしたりしにくくします。完全には防げません。</td></tr>
+	</table>
+	<p class="page-no">8</p>
+</section>
+
+<!-- ===== 7 ===== -->
+<section class="page">
+	<span class="chapter">第7章</span>
+	<h1>SEO・アクセス解析</h1>
+	<h2>SEO（エスイーオー）＝ 検索で見つけてもらう工夫</h2>
+	<div class="grid2" style="align-items:center">
+		<svg width="100%" height="150" viewBox="0 0 300 150">
+			<rect x="10" y="10" width="280" height="130" rx="8" fill="#fff" stroke="#c9ced6" stroke-width="2"/>
+			<rect x="25" y="22" width="200" height="20" rx="10" fill="#f4f6f9" stroke="#c9ced6"/><circle cx="210" cy="32" r="6" fill="none" stroke="#5064ad" stroke-width="2"/>
+			<text x="25" y="68" font-size="13" fill="#1a0dab">記事のタイトル | サイト名</text>
+			<text x="25" y="88" font-size="11" fill="#6b7280">ここに「説明文」が出ます。読む人が</text>
+			<text x="25" y="104" font-size="11" fill="#6b7280">クリックしたくなる文にしましょう。</text>
+			<rect x="25" y="118" width="120" height="6" fill="#ddd"/>
+		</svg>
+		<div>
+			<p><b>説明文</b>は、検索結果でタイトルの下に出る文です。記事ごとに、投稿画面のいちばん下の <span class="menu">snowweb：SEO</span> の欄に書けます。</p>
+			<p class="small">書かないときは、記事の最初の文が自動で使われます。</p>
+		</div>
+	</div>
+	<table>
+		<tr><th>OGP</th><td>X（Twitter）や LINE でシェアされたときに、画像とタイトルがきれいに出るようにします。</td></tr>
+		<tr><th>構造化データ</th><td>「これは記事です」「書いた日はこれです」と、Google にわかりやすく伝えます。</td></tr>
+		<tr><th>noindex</th><td>「このページは検索結果に出さないで」とお願いする印です。</td></tr>
+	</table>
+	<div class="box blue"><p style="margin:0">Yoast SEO などの<b>SEO プラグインを使っている場合</b>は、二重にならないように snowweb の SEO 機能は自動で止まります。</p></div>
+	<h2>アクセス解析 ＝ 何人来たかを数える</h2>
+	<table>
+		<tr><th>GA4 の測定 ID</th><td>Google アナリティクスの <code>G-</code> ではじまる番号を入れると、計測が始まります。</td></tr>
+		<tr><th>確認コード</th><td>Google Search Console や Bing に「このサイトは自分のものです」と証明するための文字です。</td></tr>
+		<tr><th>人気記事の集計 <span class="tag off">最初はオフ</span></th><td>記事ごとに読まれた回数を数え、設定画面の下にランキングを出します。</td></tr>
+	</table>
+	<p class="page-no">9</p>
+</section>
+
+<!-- ===== 8 ===== -->
+<section class="page">
+	<span class="chapter">第8章</span>
+	<h1>広告：広告をのせる</h1>
+	<div class="grid2" style="align-items:start">
+		<svg width="100%" height="330" viewBox="0 0 300 330">
+			<rect x="10" y="10" width="190" height="310" rx="6" fill="#fff" stroke="#c9ced6" stroke-width="2"/>
+			<rect x="25" y="25" width="160" height="12" fill="#666"/>
+			<rect x="25" y="48" width="160" height="30" fill="#ffe58a" stroke="#c99a2e" stroke-dasharray="4 3"/><text x="105" y="68" text-anchor="middle" font-size="11">① 本文の最初</text>
+			<rect x="25" y="88" width="150" height="5" fill="#ddd"/><rect x="25" y="98" width="140" height="5" fill="#ddd"/>
+			<rect x="25" y="112" width="160" height="30" fill="#ffe58a" stroke="#c99a2e" stroke-dasharray="4 3"/><text x="105" y="132" text-anchor="middle" font-size="11">② 最初の見出しの前</text>
+			<rect x="25" y="150" width="160" height="16" fill="#f4f4f4"/><rect x="25" y="150" width="4" height="16" fill="#5064ad"/>
+			<rect x="25" y="176" width="150" height="5" fill="#ddd"/><rect x="25" y="186" width="140" height="5" fill="#ddd"/><rect x="25" y="196" width="150" height="5" fill="#ddd"/><rect x="25" y="206" width="120" height="5" fill="#ddd"/>
+			<rect x="25" y="225" width="160" height="30" fill="#ffe58a" stroke="#c99a2e" stroke-dasharray="4 3"/><text x="105" y="245" text-anchor="middle" font-size="11">③ 本文の最後</text>
+			<rect x="210" y="10" width="80" height="60" fill="#fff" stroke="#c9ced6"/><rect x="210" y="78" width="80" height="80" fill="#333"/>
+			<rect x="210" y="166" width="80" height="70" fill="#ffe58a" stroke="#c99a2e" stroke-dasharray="4 3"/><text x="250" y="198" text-anchor="middle" font-size="10">④ サイド</text><text x="250" y="212" text-anchor="middle" font-size="10">バー</text>
+		</svg>
+		<div>
+			<h3>つかい方</h3>
+			<ol class="steps">
+				<li>広告の会社（Google アドセンスなど）でもらった<b>広告コード</b>を、<span class="menu">広告コード</span>の欄にはりつけます。</li>
+				<li>左の絵の①〜④のうち、出したい場所をオンにします。</li>
+				<li><span class="menu">設定を保存</span> を押します。</li>
+			</ol>
+			<div class="box ok"><div class="box-title">自動広告</div><p style="margin:0">アドセンスの「サイト運営者 ID」（<code>ca-pub-</code>ではじまる番号）を入れて自動広告をオンにすると、場所は Google が自動で決めてくれます。</p></div>
+		</div>
+	</div>
+	<div class="say">
+		<svg viewBox="0 0 100 100"><use href="#yuki"/></svg>
+		<div class="bubble">ログインしている間は、自分の広告をまちがえてクリックしないように<b>広告が出ない</b>ようになっています。広告が見えなくても、こわれていないよ！</div>
+	</div>
+	<table>
+		<tr><th>ads.txt</th><td>アドセンスで使う「ads.txt」の中身をはりつけると、<code>/ads.txt</code> で表示します。</td></tr>
+	</table>
+	<p class="page-no">10</p>
+</section>
+
+<!-- ===== 9 ===== -->
+<section class="page">
+	<span class="chapter">第9章</span>
+	<h1>セキュリティ：サイトを守る</h1>
+	<div class="grid2" style="align-items:center">
+		<svg width="100%" height="190" viewBox="0 0 300 190">
+			<rect x="70" y="50" width="160" height="120" fill="#eef1f8" stroke="#9aa8c9" stroke-width="3"/>
+			<polygon points="60,52 150,5 240,52" fill="#9aa8c9"/>
+			<rect x="130" y="110" width="40" height="60" fill="#5064ad"/>
+			<rect x="90" y="75" width="30" height="25" fill="#fff" stroke="#9aa8c9" stroke-width="2"/><path d="M90 75 l30 25 M120 75 l-30 25" stroke="#d9534f" stroke-width="3"/>
+			<rect x="180" y="75" width="30" height="25" fill="#fff" stroke="#9aa8c9" stroke-width="2"/><path d="M180 75 l30 25 M210 75 l-30 25" stroke="#d9534f" stroke-width="3"/>
+			<g transform="translate(225 105)"><use href="#shield" width="70" height="70"/></g>
+			<text x="150" y="188" text-anchor="middle" font-size="12" fill="#6b7280">使わない窓は、最初からカギをかけておく</text>
+		</svg>
+		<div>
+			<p>サイトをお家にたとえると、snowweb は<mark>使っていない窓やドアに、最初からカギをかけておく</mark>テーマです。</p>
+			<p class="small">はじめは全部オンになっています。ふつうはそのままで大丈夫です。</p>
+		</div>
+	</div>
+	<table>
+		<tr><th>バージョン番号を隠す</th><td>「このサイトは古いワードプレスだ」と、悪い人に知られにくくします。</td></tr>
+		<tr><th>セキュリティヘッダー</th><td>ほかのサイトの中にこっそり埋めこまれるのを防ぐなど、ブラウザーに「守って」と伝えます。</td></tr>
+		<tr><th>XML-RPC を止める</th><td>パスワードの当てずっぽう攻撃に使われやすい入口を閉じます。<br><span class="small">Jetpack や一部のスマホアプリを使うときはオフにしてください。</span></td></tr>
+		<tr><th>ユーザー名を隠す</th><td>ログインに使う名前を、外から調べられないようにします。</td></tr>
+	</table>
+	<h2>もしログインできなくなったら（セーフモード）</h2>
+	<p>サーバーにある <code>wp-config.php</code> というファイルに、次の1行を書きたすと、snowweb の守る機能がすべて止まります。</p>
+	<div class="code-block">define( 'SNOWWEB_SAFE_MODE', true );</div>
+	<p class="small">問題が直ったら、この1行は消してください。ファイルの書きかえ方がわからないときは、サーバーの会社のサポートに相談しましょう。</p>
+	<div class="box warn"><p style="margin:0">テーマを別のものに変えると、snowweb の守る機能も一緒になくなります。また、テーマだけでは<b>すべての攻撃は防げません</b>。ワードプレスやプラグインはいつも最新にして、パスワードは長く、ほかと使い回さないようにしましょう。</p></div>
+	<p class="page-no">11</p>
+</section>
+
+<!-- ===== 10 ===== -->
+<section class="page">
+	<span class="chapter">第10章</span>
+	<h1>設定の保存と、困ったとき</h1>
+	<h2>設定をファイルに保存する</h2>
+	<div class="grid2" style="align-items:center">
+		<svg width="100%" height="120" viewBox="0 0 300 120">
+			<rect x="15" y="20" width="100" height="80" rx="8" fill="#eef1f8" stroke="#9aa8c9" stroke-width="2"/><g transform="translate(45 35)"><use href="#shield" width="40" height="40"/></g>
+			<path d="M125 50 h50" stroke="#5064ad" stroke-width="4"/><path d="M165 40 l12 10 -12 10" stroke="#5064ad" stroke-width="4" fill="none"/>
+			<path d="M175 70 h-50" stroke="#3aa776" stroke-width="4"/><path d="M135 60 l-12 10 12 10" stroke="#3aa776" stroke-width="4" fill="none"/>
+			<path d="M190 15 h60 l20 20 v70 h-80 z" fill="#fff" stroke="#c9ced6" stroke-width="2"/><text x="230" y="70" text-anchor="middle" font-size="13" fill="#2b2f36">.json</text>
+		</svg>
+		<div><p><span class="menu">設定の保存</span> タブの <span class="menu">ファイルに書き出す</span> で、今の設定を1つのファイルにできます。引っこしのときは <span class="menu">読み込む</span> でもどせます。</p></div>
+	</div>
+	<h2>困ったときは</h2>
+	<table>
+		<tr><th>デザインが新しくならない</th><td><span class="menu">外観</span> → <span class="menu">エディター</span> でテンプレートを自分で変えたことがあると、そちらが優先されます。変えたテンプレートを開き、右上の <span class="menu">⋮</span> → <span class="menu">リセット</span> を押してください。</td></tr>
+		<tr><th>広告が出ない</th><td>ログイン中は出ません。ログアウトするか、別のブラウザーで見てください。</td></tr>
+		<tr><th>目次が出ない</th><td>見出しの数が少ないと出ません。<span class="menu">記事</span> タブの「目次を出す見出しの数」を確認してください。</td></tr>
+		<tr><th>SEO の欄がない</th><td>SEO プラグインが有効なときは、snowweb の SEO 機能は止まっています。</td></tr>
+		<tr><th>ログインできない</th><td>11ページの「セーフモード」をためしてください。</td></tr>
+	</table>
+	<h2>おかしいところを見つけたら</h2>
+	<div class="grid2">
+		<div class="box"><div class="box-title">ふつうの不具合</div><p style="margin:0">GitHub の <span class="menu">Issues</span> に書いてください。どのページで、何をしたら、どうなったかと、画面の写真があると助かります。</p></div>
+		<div class="box warn"><div class="box-title">セキュリティの問題</div><p style="margin:0">悪用されるおそれがあるので、<b>みんなが見られる場所には書かず</b>、GitHub の <span class="menu">Security</span> → <span class="menu">Report a vulnerability</span> からこっそり知らせてください。</p></div>
+	</div>
+	<p class="page-no">12</p>
+</section>
+
+<!-- ===== 11 ===== -->
+<section class="page">
+	<span class="chapter">第11章</span>
+	<h1>ことばの説明（用語集）</h1>
+	<table>
+		<tr><th>ワードプレス</th><td>ホームページやブログを作るための、世界でいちばん使われている道具。</td></tr>
+		<tr><th>テーマ</th><td>サイトの見た目（デザイン）を決めるもの。着せかえの服のようなもの。</td></tr>
+		<tr><th>プラグイン</th><td>ワードプレスにあとから機能を足す部品。snowweb は、よく使う機能をテーマの中に入れてあるので、プラグインを減らせます。</td></tr>
+		<tr><th>管理画面</th><td>ワードプレスの設定や記事を書く画面。サイトのアドレスの後ろに <code>/wp-admin</code> をつけると開けます。</td></tr>
+		<tr><th>PHP</th><td>ワードプレスを動かしているプログラムのことば。</td></tr>
+		<tr><th>サイドバー</th><td>記事の横にある細い列。検索やカテゴリーをならべます。</td></tr>
+		<tr><th>アイキャッチ画像</th><td>記事の顔になる画像。一覧やシェアのときに表示されます。</td></tr>
+		<tr><th>SEO</th><td>Google などの検索で、見つけてもらいやすくする工夫。</td></tr>
+		<tr><th>OGP</th><td>SNS でシェアされたときの、画像やタイトルの見え方を決める情報。</td></tr>
+		<tr><th>GA4</th><td>Google アナリティクス4。サイトに何人来たかなどを調べる無料の道具。</td></tr>
+		<tr><th>アドセンス</th><td>Google の広告サービス。サイトに広告をのせて、収入を得られます。</td></tr>
+		<tr><th>バックアップ</th><td>もしものために、サイトのコピーをとっておくこと。</td></tr>
+		<tr><th>GitHub</th><td>プログラムを保管・公開する場所。snowweb の最新版はここにあります。</td></tr>
+		<tr><th>脆弱性（ぜいじゃくせい）</th><td>プログラムの弱いところ。悪い人に使われると、サイトが乗っ取られることもあります。</td></tr>
+	</table>
+	<div class="say" style="margin-top:6mm">
+		<svg viewBox="0 0 100 100"><use href="#yuki"/></svg>
+		<div class="bubble">さいごまで読んでくれてありがとう！snowweb は、みんなの声でどんどん良くなっていくテーマです。これからもよろしくね。</div>
+	</div>
+	<p class="small center" style="margin-top:6mm">snowweb つかいかたガイド　バージョン 0.0.0.5 対応　／　配布元：snowweb.jp　／　ライセンス：GPL v2 以降</p>
+	<p class="page-no">13</p>
+</section>
+
+</body>
+</html>
