@@ -63,6 +63,11 @@ snowweb（スノーウェブ）は、「セキュリティ強化型」をコン�
 ### 安全対策
 - 入力欄ごとに、正しい形の値だけを保存するようにしました（例：GA4 は「G-」で始まる ID のみ）
 
+### 配布・説明書
+- 配布用の zip（snowweb.zip）を公開しました。下のアドレスから、いつでも最新版をダウンロードできます
+  - https://github.com/egralnet/snowweb/releases/latest/download/snowweb.zip
+- イラスト付きの説明書「snowweb つかいかたガイド」（PDF・14ページ）を作りました
+
 ---
 
 ## ver 0.0.0.4（2026年11月3日）
