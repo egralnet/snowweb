@@ -997,3 +997,360 @@ body.snowweb-col-2.snowweb-sidebar-left .snowweb-sidebar {
 .snowweb-404 .wp-block-search {
 	margin-top: 24px;
 }
+
+/* ===== 記事の機能（snowweb設定 → 記事） ===== */
+
+/* 文字の大きさ */
+html[data-font-size="l"] .snowweb-prose {
+	--sw-article: 21px;
+}
+
+html[data-font-size="xl"] .snowweb-prose {
+	--sw-article: 24px;
+}
+
+/* パンくずリスト */
+.snowweb-crumb ol {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 12px;
+	color: var(--sw-sub);
+}
+
+.snowweb-crumb li + li::before {
+	content: ">";
+	margin: 0 8px;
+}
+
+.snowweb-crumb a {
+	color: var(--sw-sub);
+}
+
+/* 日付・更新日・文字の大きさ */
+.snowweb-entry__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 16px;
+	font-size: 12.5px;
+	color: var(--sw-sub);
+}
+
+.snowweb-entry__meta > .wp-block-post-date {
+	margin: 0;
+}
+
+.snowweb-entry__modified::before {
+	content: "";
+}
+
+.snowweb-font-switch {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin-left: auto;
+}
+
+.snowweb-font-switch__label {
+	margin-right: 4px;
+}
+
+.snowweb-font-switch button {
+	padding: 2px 12px;
+	border: 1px solid var(--sw-line);
+	border-radius: 999px;
+	background: var(--sw-bg);
+	color: var(--sw-text);
+	font: inherit;
+	font-size: 12px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.snowweb-font-switch button:hover {
+	border-color: var(--sw-text);
+}
+
+.snowweb-font-switch button[aria-pressed="true"] {
+	background: var(--sw-dark);
+	border-color: var(--sw-dark);
+	color: var(--sw-dark-text);
+}
+
+/* 目次 */
+.snowweb-toc {
+	margin: 0 0 2em;
+	padding: 0 22px;
+	border: 1px solid var(--sw-line);
+	border-top: 3px solid var(--sw-dark);
+	border-radius: var(--sw-radius);
+	background: var(--sw-soft);
+	font-size: 14px;
+}
+
+.snowweb-toc__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 14px 0;
+	cursor: pointer;
+	list-style: none;
+}
+
+.snowweb-toc__head::-webkit-details-marker {
+	display: none;
+}
+
+.snowweb-toc__title {
+	font-weight: 700;
+}
+
+.snowweb-toc__toggle {
+	min-width: 5.2em;
+	padding: 3px 12px;
+	border-radius: 999px;
+	background: var(--sw-dark);
+	color: var(--sw-dark-text);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-align: center;
+}
+
+.snowweb-toc__close,
+.snowweb-toc[open] .snowweb-toc__open {
+	display: none;
+}
+
+.snowweb-toc[open] .snowweb-toc__close {
+	display: inline;
+}
+
+.snowweb-toc ol {
+	margin: 0;
+	padding-left: 1.4em;
+	line-height: 2;
+}
+
+.snowweb-toc > ol {
+	padding-bottom: 16px;
+}
+
+.snowweb-toc ol ol {
+	padding-left: 1em;
+	list-style: none;
+	font-size: 13px;
+	line-height: 1.9;
+}
+
+.snowweb-toc ol ol li::before {
+	content: "– ";
+	color: var(--sw-sub);
+}
+
+.snowweb-toc li + li {
+	margin-top: 0;
+}
+
+.snowweb-toc a {
+	color: var(--sw-text);
+}
+
+.snowweb-prose :is(h2, h3, h4)[id] {
+	scroll-margin-top: 16px;
+}
+
+/* シェア */
+.snowweb-share {
+	margin-top: 48px;
+}
+
+.snowweb-share__title {
+	margin: 0 0 10px;
+	font-size: 13px;
+	font-weight: 700;
+	text-align: center;
+	color: var(--sw-sub);
+}
+
+.snowweb-prose .snowweb-share ul,
+.snowweb-share ul {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.snowweb-share li + li {
+	margin-top: 0;
+}
+
+.snowweb-share a,
+.snowweb-share button {
+	display: block;
+	width: 100%;
+	padding: 10px 4px;
+	box-sizing: border-box;
+	border: 1px solid var(--sw-line);
+	border-radius: var(--sw-radius);
+	background: var(--sw-bg);
+	color: var(--sw-text);
+	font: inherit;
+	font-size: 12px;
+	font-weight: 700;
+	text-align: center;
+	cursor: pointer;
+}
+
+.snowweb-share a:hover,
+.snowweb-share button:hover {
+	border-color: var(--sw-text);
+	text-decoration: none;
+}
+
+@media (max-width: 600px) {
+	.snowweb-share ul {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+/* この記事を書いた人 */
+.snowweb-author {
+	position: relative;
+	margin-top: 40px;
+	padding: 28px 24px 24px;
+	border: 1px solid var(--sw-line);
+	border-radius: var(--sw-radius);
+}
+
+.snowweb-prose .snowweb-author > .snowweb-author__legend {
+	position: absolute;
+	top: -0.85em;
+	left: 14px;
+	display: inline-block;
+	margin: 0;
+	padding: 0 10px;
+	border: 0;
+	background: var(--sw-bg);
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.snowweb-author__main {
+	display: flex;
+	gap: 24px;
+	align-items: flex-start;
+}
+
+.snowweb-author__person {
+	flex: none;
+	width: 110px;
+	text-align: center;
+}
+
+.snowweb-author__person img {
+	display: block;
+	width: 96px;
+	height: 96px;
+	margin: 0 auto;
+	border-radius: 50%;
+}
+
+.snowweb-author__name {
+	margin: 8px 0 0 !important;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.snowweb-author__text {
+	font-size: 14px;
+	line-height: 1.8;
+}
+
+.snowweb-author__text p {
+	margin: 0 0 0.8em;
+}
+
+@media (max-width: 600px) {
+	.snowweb-author__main {
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+/* 関連記事 */
+.snowweb-related {
+	margin-top: 48px;
+}
+
+.snowweb-prose .snowweb-related .snowweb-section-title {
+	font-size: 16px;
+}
+
+.snowweb-prose .snowweb-related__list,
+.snowweb-related__list {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 28px 20px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 16px;
+}
+
+.snowweb-related__list li + li {
+	margin-top: 0;
+}
+
+.snowweb-related .snowweb-thumb {
+	display: block;
+}
+
+.snowweb-related .snowweb-thumb img {
+	border-radius: 0;
+}
+
+.snowweb-related .snowweb-thumb--empty {
+	height: 100%;
+}
+
+/* コピー対策（ソースコードの枠は除く） */
+body.snowweb-protect .snowweb-prose {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+body.snowweb-protect .snowweb-prose :is(pre, code) {
+	-webkit-user-select: text;
+	user-select: text;
+}
+
+@media print {
+	body.snowweb-protect .snowweb-prose {
+		display: none;
+	}
+}
+
+/* ===== 広告（snowweb設定 → 広告） ===== */
+.snowweb-ad {
+	margin: 2em 0;
+	text-align: center;
+	overflow: hidden;
+}
+
+.snowweb-ad__label {
+	margin: 0 0 6px !important;
+	font-size: 11px;
+	color: var(--sw-sub);
+	letter-spacing: 0.08em;
+}
+
+.snowweb-sidebar .snowweb-ad {
+	margin: 0;
+}

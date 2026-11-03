@@ -2,13 +2,20 @@
 Contributors: snowweb
 Requires at least: 6.6
 Requires PHP: 7.4
-Stable tag: 0.0.0.4
+Stable tag: 0.0.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Security-focused Japanese block theme.
 
 == Changelog ==
+
+= 0.0.0.5 =
+* snowweb設定に「記事」タブ：パンくずリスト、更新日、文字の大きさの切り替え、目次、シェアボタン（外部スクリプトなし）、この記事を書いた人、関連記事、コピー対策。
+* 「SEO」タブ：タイトルの区切り、説明文、OGP、X のカード、構造化データ（記事・パンくず・サイト）、検索結果・日付一覧・2ページ目以降の noindex。投稿画面に記事ごとの説明文・noindex の入力欄。SEO プラグインが有効なときは自動で停止。
+* 「広告」タブ：AdSense の自動広告、広告コードの表示場所（本文の最初・最初の見出し2の前・本文の最後・サイドバー）、ログイン中は非表示、ads.txt。スクリプトを含む広告コードは管理者だけが保存可能。
+* 「アクセス解析」タブ：GA4、Search Console・Bing の確認コード、人気記事の集計。
+* 「設定の保存」タブ：設定の書き出し・読み込み（JSON）。
 
 = 0.0.0.4 =
 * デザインを ai-ski.net に合わせて作り直し（ヘッダー、2列の記事カード、おすすめ記事、サイドバーの検索・カテゴリー・新着記事、記事の見出し2〜6、表、引用、コード、フッター）。

@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SNOWWEB_VERSION', '0.0.0.4' );
+define( 'SNOWWEB_VERSION', '0.0.0.5' );
 
 /**
  * テーマの基本機能を有効にする。
@@ -36,7 +36,12 @@ add_action( 'wp_enqueue_scripts', 'snowweb_enqueue_assets' );
 require_once get_template_directory() . '/inc/settings.php';
 require_once get_template_directory() . '/inc/security.php';
 require_once get_template_directory() . '/inc/layout.php';
+require_once get_template_directory() . '/inc/article.php';
+require_once get_template_directory() . '/inc/seo.php';
+require_once get_template_directory() . '/inc/ads.php';
+require_once get_template_directory() . '/inc/analytics.php';
 
 if ( is_admin() ) {
 	require_once get_template_directory() . '/inc/admin.php';
+	require_once get_template_directory() . '/inc/backup.php';
 }
