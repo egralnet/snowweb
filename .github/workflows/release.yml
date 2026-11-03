@@ -4,10 +4,13 @@ name: Release
 # GitHub の「Releases」に公開します。
 # いつでも最新版を落とせる URL：
 #   https://github.com/egralnet/snowweb/releases/latest/download/snowweb.zip
+# GitHub の「Actions」→「Release」→「Run workflow」ボタンでも実行できます。
+# そのときは style.css の Version からタグ（v0.0.0.5 など）を自動で作ります。
 on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -18,12 +21,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: タグと style.css のバージョンが同じか確かめる
+      - name: バージョンを決める（タグと style.css が同じか確かめる）
         run: |
-          tag="${GITHUB_REF_NAME#v}"
           ver="$(sed -n 's/^Version: *//p' style.css | tr -d '\r')"
-          echo "tag=$tag style.css=$ver"
-          test "$tag" = "$ver"
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            test "${GITHUB_REF_NAME#v}" = "$ver"
+          fi
+          echo "TAG=v$ver" >> "$GITHUB_ENV"
+          echo "version=$ver"
 
       - name: 配布用の zip を作る（フォルダー名は snowweb）
         run: |
@@ -35,6 +40,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" snowweb.zip \
-            --title "snowweb ${GITHUB_REF_NAME#v}" \
+          gh release create "$TAG" snowweb.zip \
+            --target "$GITHUB_SHA" \
+            --title "snowweb ${TAG#v}" \
             --notes "変更内容は readme.txt の Changelog をご覧ください。インストール：管理画面の「外観 → テーマ → 新しいテーマを追加 → テーマのアップロード」で snowweb.zip を選びます。"
