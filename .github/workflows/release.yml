@@ -1,0 +1,40 @@
+name: Release
+
+# 「v0.0.0.5」のようなタグを push すると、配布用の snowweb.zip を作って
+# GitHub の「Releases」に公開します。
+# いつでも最新版を落とせる URL：
+#   https://github.com/egralnet/snowweb/releases/latest/download/snowweb.zip
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: タグと style.css のバージョンが同じか確かめる
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          ver="$(sed -n 's/^Version: *//p' style.css | tr -d '\r')"
+          echo "tag=$tag style.css=$ver"
+          test "$tag" = "$ver"
+
+      - name: 配布用の zip を作る（フォルダー名は snowweb）
+        run: |
+          # .gitattributes の export-ignore（docs・.github など）は入らない
+          git archive --format=zip --prefix=snowweb/ -o snowweb.zip HEAD
+          unzip -l snowweb.zip
+
+      - name: Releases に公開する
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" snowweb.zip \
+            --title "snowweb ${GITHUB_REF_NAME#v}" \
+            --notes "変更内容は readme.txt の Changelog をご覧ください。インストール：管理画面の「外観 → テーマ → 新しいテーマを追加 → テーマのアップロード」で snowweb.zip を選びます。"
